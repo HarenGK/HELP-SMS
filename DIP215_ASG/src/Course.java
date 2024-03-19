@@ -1,15 +1,18 @@
 package DIP215_ASG.src;
+import java.util.ArrayList;
 
 public class Course {
     private String courseId;
     private String courseName;
     private int creditHours;
+    private ArrayList<String> courseSchedule; // ArrayList to store course schedule
 
     // Constructor
     public Course(String courseId, String courseName, int creditHours) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.creditHours = creditHours;
+        this.courseSchedule = new ArrayList<>(); // Initialize the ArrayList
     }
 
     // Getter methods
@@ -25,6 +28,10 @@ public class Course {
         return creditHours;
     }
 
+    public ArrayList<String> getCourseSchedule() {
+        return courseSchedule;
+    }
+
     // Setter methods
     public void setCourseId(String courseId) {
         this.courseId = courseId;
@@ -36,5 +43,10 @@ public class Course {
 
     public void setCreditHours(int creditHours) {
         this.creditHours = creditHours;
+    }
+
+    // Method to add a schedule to the course
+    public void addSchedule(String schedule) {
+        courseSchedule.add(schedule);
     }
 }
