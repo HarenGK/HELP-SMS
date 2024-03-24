@@ -36,7 +36,7 @@ public class Teacher {
         System.out.println("Qualifications: " + teacherQualifications);
         System.out.println("Courses Assigned:");
         for (Course course : teacherAssignedCourses) {
-            System.out.println("- " + course.getCourseName());
+            System.out.println("- " );
         }
     }
     public String getTeacherQualifications() {
