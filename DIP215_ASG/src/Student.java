@@ -1,43 +1,67 @@
 package DIP215_ASG.src;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Student {
     private String studentID;
     private String studentName;
     private String studentType;
     private int totalCreditHours;
-    private ArrayList<Course> coursesEnrolled;
+    private List<Course> coursesEnrolled;
 
-    public Student(String studentID, String studentName, String studentType, int totalCreditHours){
+    public Student(String studentID, String studentName, String studentType, int totalCreditHours) {
         this.studentID = studentID;
         this.studentName = studentName;
         this.studentType = studentType;
         this.totalCreditHours = totalCreditHours;
+        this.coursesEnrolled = new ArrayList<>();
     }
 
-    public String getStudentId(){
+    public String getStudentId() {
         return studentID;
     }
 
-    public String getStudentName(){
+    public void setStudentId(String studentID) {
+        this.studentID = studentID;
+    }
+
+    public String getStudentName() {
         return studentName;
     }
 
-    public String getStudentType(){
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getStudentType() {
         return studentType;
     }
 
-    public int getCreditHours() {
+    public void setStudentType(String studentType) {
+        this.studentType = studentType;
+    }
+
+    public int getTotalCreditHours() {
         return totalCreditHours;
     }
 
-    // Method to add a course to the enrolled courses list
-    public void enrollCourse(Course course) {
-        coursesEnrolled.add(course);
+    public void setTotalCreditHours(int totalCreditHours) {
+        this.totalCreditHours = totalCreditHours;
     }
 
-    // Method to get the list of enrolled courses
-    public ArrayList<Course> getCoursesEnrolled() {
-        return coursesEnrolled;
+    public void enrollCourse(Course course) {
+        coursesEnrolled.add(course);
+        // Optionally update totalCreditHours here
+    }
+
+    public void dropCourse(Course course) {
+        coursesEnrolled.remove(course);
+        // Optionally update totalCreditHours here
+    }
+
+    public List<Course> getCoursesEnrolled() {
+        return Collections.unmodifiableList(coursesEnrolled);
     }
 }

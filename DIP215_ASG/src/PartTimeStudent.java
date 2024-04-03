@@ -1,10 +1,14 @@
 package DIP215_ASG.src;
 
 public class PartTimeStudent extends Student {
+    private static final int PartTimeMaxCredits = 8; // Example, assuming part-time students can enroll in a maximum of
+                                                     // 8 credits
     private boolean employmentStatus;
 
     public PartTimeStudent(String studentID, String studentName, int creditHours, boolean employmentStatus) {
-        super(studentID, studentName, "Part Time", creditHours); // Call to superclass constructor
+        // Use 'Math.min' to ensure that credit hours do not exceed the part-time
+        // maximum
+        super(studentID, studentName, "Part Time", Math.min(creditHours, PartTimeMaxCredits));
         this.employmentStatus = employmentStatus;
     }
 
@@ -18,4 +22,3 @@ public class PartTimeStudent extends Student {
         this.employmentStatus = employmentStatus;
     }
 }
-
