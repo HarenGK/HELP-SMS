@@ -21,4 +21,9 @@ public class PartTimeStudent extends Student {
     public void setEmploymentStatus(boolean employmentStatus) {
         this.employmentStatus = employmentStatus;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nEmployment Status: " + employmentStatus;
+    }
 }

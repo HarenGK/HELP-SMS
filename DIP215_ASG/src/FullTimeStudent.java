@@ -18,4 +18,9 @@ public class FullTimeStudent extends Student {
     public void setScholarship(double scholarship) {
         this.scholarship = scholarship;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nEmployment Status: " + scholarship;
+    }
 }

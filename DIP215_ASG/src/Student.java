@@ -64,4 +64,13 @@ public class Student {
     public List<Course> getCoursesEnrolled() {
         return Collections.unmodifiableList(coursesEnrolled);
     }
+
+    @Override
+    public String toString(){
+        return "\nStudent ID: " + studentID +
+                "\nStudent Name: " + studentName +
+                "\nStudent Type: " + studentType +
+                "\nTotal Credit Hours: " + totalCreditHours +
+                "\nCourses Enrolled: \n" + getCoursesEnrolled() + "\n";
+    }
 }

@@ -49,4 +49,16 @@ public class Course {
     public void addSchedule(String schedule) {
         courseSchedule.add(schedule);
     }
+
+    public void displayCourseInfo(){
+        System.out.println("Course ID: " + courseId);
+        System.out.println("Course Name: " + courseName);
+        System.out.println("Course Credit Hours: " + creditHours);
+
+        for (String course : courseSchedule){
+            System.out.println("Course Schedule: " + course);
+        }
+    }
+
+
 }
