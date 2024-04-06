@@ -1,13 +1,14 @@
 package DIP215_ASG.src;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Course {
     private String courseId;
     private String courseName;
     private int creditHours;
-    private ArrayList<String> courseSchedule; // ArrayList to store course schedule
+    private List<String> courseSchedule; // Use List for type flexibility
 
-    // Constructor
     public Course(String courseId, String courseName, int creditHours) {
         this.courseId = courseId;
         this.courseName = courseName;
@@ -15,50 +16,45 @@ public class Course {
         this.courseSchedule = new ArrayList<>(); // Initialize the ArrayList
     }
 
-    // Getter methods
     public String getCourseId() {
         return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
     public String getCourseName() {
         return courseName;
     }
 
-    public int getCreditHours() {
-        return creditHours;
-    }
-
-    public ArrayList<String> getCourseSchedule() {
-        return courseSchedule;
-    }
-
-    // Setter methods
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
-
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    public int getCreditHours() {
+        return creditHours;
     }
 
     public void setCreditHours(int creditHours) {
         this.creditHours = creditHours;
     }
 
-    // Method to add a schedule to the course
+    public List<String> getCourseSchedule() {
+        return new ArrayList<>(courseSchedule); // Return a copy of the courseSchedule list
+    }
+
     public void addSchedule(String schedule) {
         courseSchedule.add(schedule);
     }
 
-    public void displayCourseInfo(){
+    public void displayCourseInfo() {
         System.out.println("Course ID: " + courseId);
         System.out.println("Course Name: " + courseName);
         System.out.println("Course Credit Hours: " + creditHours);
-
-        for (String course : courseSchedule){
-            System.out.println("Course Schedule: " + course);
+        System.out.println("Course Schedule: ");
+        for (String schedule : courseSchedule) {
+            System.out.println(schedule);
         }
     }
-
-
 }
