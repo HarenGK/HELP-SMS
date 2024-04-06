@@ -11,6 +11,7 @@ public class Course {
     private int creditHours;
     private List<String> courseSchedule; // Use List for type flexibility
     private Map<Student, List<Boolean>> attendanceRecords; // Maps each student to their attendance record
+    private Map<Student, Double> grades = new HashMap<>();
 
     public Course(String courseId, String courseName, int creditHours) {
         this.courseId = courseId;
@@ -18,6 +19,7 @@ public class Course {
         this.creditHours = creditHours;
         this.courseSchedule = new ArrayList<>(); // Initialize the ArrayList
         this.attendanceRecords = new HashMap<>(); // Initialize the HashMap
+        this.grades = new HashMap<>(); // Initialize the grades map
     }
 
     public String getCourseId() {
@@ -77,5 +79,23 @@ public class Course {
                 System.out.println("\t" + (present ? "Present" : "Absent"));
             }
         });
+    }
+    public void setGrade(Student student, Double grade) {
+        if (!attendanceRecords.containsKey(student)) {
+            System.out.println("Student is not enrolled in this course.");
+            return;
+        }
+        grades.put(student, grade);
+    }
+
+    // Method to get a grade for a student
+    public Double getGrade(Student student) {
+        return grades.get(student); // Returns null if the student does not have a grade
+    }
+
+    // Method to display all grades for the course
+    public void displayGrades() {
+        System.out.println("Grades for Course: " + courseName);
+        grades.forEach((student, grade) -> System.out.println(student.getStudentName() + ": " + grade));
     }
 }
