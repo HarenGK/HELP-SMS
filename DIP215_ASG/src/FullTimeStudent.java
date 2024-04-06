@@ -21,6 +21,7 @@ public class FullTimeStudent extends Student {
 
     @Override
     public String toString() {
-        return super.toString() + "\nEmployment Status: " + scholarship;
+        return super.toString() + "\nScholarship Amount: " + scholarship;
     }
+
 }
