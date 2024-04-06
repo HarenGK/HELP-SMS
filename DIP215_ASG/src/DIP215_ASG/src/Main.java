@@ -1,8 +1,11 @@
 package DIP215_ASG.src;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
@@ -53,27 +56,41 @@ public class Main {
     private static void enrollStudent() {
         System.out.println("Enter student ID: ");
         String studentId = scanner.next();
+        scanner.nextLine(); // Consume the newline left-over
         System.out.println("Enter student's name: ");
-        String studentName = scanner.next();
+        String studentName = scanner.nextLine();
         System.out.println("Is the student full-time? (yes/no): ");
         String isFullTime = scanner.next();
-        int creditHours = isFullTime.equalsIgnoreCase("yes") ? FullTimeStudent.FullTimeMinCredits
-                : PartTimeStudent.PartTimeMaxCredits;
+        int creditHours = isFullTime.equalsIgnoreCase("yes") ?
+                FullTimeStudent.getFullTimeMinCredits() :
+                PartTimeStudent.getPartTimeMaxCredits(); // Assuming a similar getter exists in PartTimeStudent
+
+        isFullTime = scanner.next();
+        boolean fullTime = isFullTime.equalsIgnoreCase("yes");
+        creditHours = fullTime ? FullTimeStudent.getFullTimeMinCredits() : PartTimeStudent.getPartTimeMaxCredits();
 
         Student student;
-        if (isFullTime.equalsIgnoreCase("yes")) {
+        if (fullTime) {
             System.out.println("Enter scholarship amount (or 0 if none): ");
+            while (!scanner.hasNextDouble()) {
+                System.out.println("Please enter a valid scholarship amount:");
+                scanner.next(); // Consume the invalid input
+            }
             double scholarship = scanner.nextDouble();
+            scanner.nextLine(); // Consume the newline left-over
             student = new FullTimeStudent(studentId, studentName, creditHours, scholarship);
         } else {
             System.out.println("Is the student employed? (yes/no): ");
             boolean isEmployed = scanner.next().equalsIgnoreCase("yes");
+            scanner.nextLine(); // Consume the newline left-over
             student = new PartTimeStudent(studentId, studentName, creditHours, isEmployed);
         }
 
         students.add(student);
         System.out.println("Student " + studentName + " has been enrolled.");
+        scanner.nextLine(); // Consume the newline left-over
     }
+
 
     private static void assignCourseToTeacher() {
         System.out.println("Enter the teacher's ID: ");
