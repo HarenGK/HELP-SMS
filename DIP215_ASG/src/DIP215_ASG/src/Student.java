@@ -53,12 +53,13 @@ public class Student {
 
     public void enrollCourse(Course course) {
         coursesEnrolled.add(course);
-        // Optionally update totalCreditHours here
+        totalCreditHours += course.getCreditHours(); // Assuming course has a getCreditHours method
     }
 
     public void dropCourse(Course course) {
-        coursesEnrolled.remove(course);
-        // Optionally update totalCreditHours here
+        if (coursesEnrolled.remove(course)) {
+            totalCreditHours -= course.getCreditHours(); // Adjust credit hours if course was successfully removed
+        }
     }
 
     public List<Course> getCoursesEnrolled() {
