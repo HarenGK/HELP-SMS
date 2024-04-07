@@ -14,7 +14,10 @@ public class Main {
     private static List<Teacher> teachers = new ArrayList<>();
 
     public static void main(String[] args) {
-        System.out.println("Welcome to the School Management System");
+        System.out.println("****************************************");
+        System.out.println("Welcome to HELP School Management System");
+        System.out.println("****************************************");
+
 
         while (true) {
             int choice = getMenuChoice();
@@ -46,7 +49,7 @@ public class Main {
                     break;
 
                 case 9:
-                    System.out.println("Exiting the School Management System. Goodbye!");
+                    System.out.println("Exiting HELP School Management System. \nThank You!");
                     scanner.close();
                     return;
 
@@ -104,7 +107,7 @@ public class Main {
         }
 
         students.add(student);
-        System.out.println("Student " + studentName + " has been enrolled.");
+        System.out.println("Student " + studentName + " (" + studentId + ") has been enrolled.");
     }
 
     private static boolean studentExists(String studentId) {
@@ -145,6 +148,7 @@ public class Main {
                     return newTeacher;
                 });
 
+        scanner.nextLine (); // Consume the newline left-over
         System.out.println("Enter the course ID to assign: ");
         String courseId = scanner.next();
         // Find or create the course
@@ -155,7 +159,7 @@ public class Main {
                     System.out.println("Enter course name: ");
                     String courseName = scanner.next();
                     System.out.println("Enter credit hours: ");
-                    int creditHours = scanner.nextInt();
+                    double creditHours = scanner.nextDouble ();
                     Course newCourse = new Course(courseId, courseName, creditHours);
                     courses.add(newCourse);
                     return newCourse;
@@ -163,7 +167,7 @@ public class Main {
 
         teacher.addCourse(course);
         System.out.println(
-                "Course " + course.getCourseName() + " has been assigned to teacher " + teacher.getTeacherName() + ".");
+                "Course " + course.getCourseName() + " (" + course.getCreditHours () + ") has been assigned to teacher " + teacher.getTeacherName() + "(" + teacher.getTeacherId () + ")");
     }
 
     private static boolean teacherExists(String teacherId) {

@@ -8,7 +8,7 @@ import java.util.Map;
 public class Course {
     private String courseId;
     private String courseName;
-    private int creditHours;
+    private double creditHours;
     private List<String> courseSchedule; // Use List for type flexibility
     private List<Student> enrolledStudents = new ArrayList<>();
     public List<Student> getStudentsEnrolled() {
@@ -17,7 +17,7 @@ public class Course {
     private Map<Student, List<Boolean>> attendanceRecords; // Maps each student to their attendance record
     private Map<Student, Double> grades = new HashMap<>();
 
-    public Course(String courseId, String courseName, int creditHours) {
+    public Course(String courseId, String courseName, double creditHours) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.creditHours = creditHours;
@@ -42,7 +42,7 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public int getCreditHours() {
+    public double getCreditHours() {
         return creditHours;
     }
 
