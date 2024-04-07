@@ -44,6 +44,11 @@ public class Main {
                     System.out.println("Exiting the School Management System. Goodbye!");
                     scanner.close();
                     return;
+
+                case 9:
+                    printAllGradeReports();
+                    break;
+
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
@@ -60,7 +65,8 @@ public class Main {
         System.out.println("5. Print grades report");
         System.out.println("6. Print attendance report");
         System.out.println("7. Print teacher assignments report");
-        System.out.println("8. Exit");
+        System.out.println("8. Print all grade reports");
+        System.out.println("9. Exit");
         System.out.print("Enter choice: ");
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume the newline left-over
@@ -232,6 +238,15 @@ public class Main {
             }
         }
     }
+
+    // Method to print grade reports for all students
+    private static void printAllGradeReports() {
+        System.out.println("Grade Reports for All Students:");
+        for (Student student : students) {
+            System.out.println(student.generateTranscript());
+        }
+    }
+
 
     // Helper methods to find a student or a course by ID
     private static Course findCourseById(String courseId) {

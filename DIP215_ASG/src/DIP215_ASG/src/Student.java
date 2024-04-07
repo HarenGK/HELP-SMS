@@ -83,6 +83,23 @@ public class Student {
         return courseGrades.get(course); // Get the grade for the course
     }
 
+    // Method to generate a transcript for a student
+    public String generateTranscript() {
+        StringBuilder transcript = new StringBuilder();
+        transcript.append("Transcript for: ").append(getStudentName())
+                .append(" (ID: ").append(getStudentId()).append(")\n")
+                .append("------------------------------------------------------\n");
+        for (Course course : getCoursesEnrolled()) {
+            Double grade = getGrade(course);
+            transcript.append(course.getCourseName())
+                    .append(": Grade: ")
+                    .append(grade != null ? grade : "N/A")
+                    .append("\n");
+        }
+        transcript.append("------------------------------------------------------\n");
+        return transcript.toString();
+    }
+
 
     @Override
     public String toString() {
