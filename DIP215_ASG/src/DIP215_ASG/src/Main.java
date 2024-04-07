@@ -40,14 +40,15 @@ public class Main {
                 case 7:
                     printTeacherAssignmentsReport();
                     break;
+
                 case 8:
+                    printAllGradeReports();
+                    break;
+
+                case 9:
                     System.out.println("Exiting the School Management System. Goodbye!");
                     scanner.close();
                     return;
-
-                case 9:
-                    printAllGradeReports();
-                    break;
 
                 default:
                     System.out.println("Invalid choice. Please try again.");
