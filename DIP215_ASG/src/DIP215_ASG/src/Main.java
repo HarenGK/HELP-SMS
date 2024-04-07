@@ -62,12 +62,19 @@ public class Main {
         System.out.println("7. Print teacher assignments report");
         System.out.println("8. Exit");
         System.out.print("Enter choice: ");
-        return scanner.nextInt();
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline left-over
+        return choice;
     }
+
 
     private static void enrollStudent() {
         System.out.print("Enter student ID: ");
         String studentId = scanner.nextLine();
+        if (studentExists(studentId)) {
+            System.out.println("A student with this ID already exists. Try again.");
+            return; // Exit the method if the student ID already exists
+        }
 
         System.out.print("Enter student's name: ");
         String studentName = scanner.nextLine();
@@ -93,6 +100,10 @@ public class Main {
         System.out.println("Student " + studentName + " has been enrolled.");
     }
 
+    private static boolean studentExists(String studentId) {
+        return students.stream().anyMatch(student -> student.getStudentId().equals(studentId));
+    }
+
     private static double getValidDoubleInput() {
         while (!scanner.hasNextDouble()) {
             System.out.println("Please enter a valid number:");
@@ -107,7 +118,12 @@ public class Main {
 
     private static void assignCourseToTeacher() {
         System.out.println("Enter the teacher's ID: ");
-        String teacherId = scanner.next();
+        String teacherId = scanner.nextLine();
+
+        if (teacherExists(teacherId)) {
+            System.out.println("A teacher with this ID already exists. Try again.");
+            return; // Exit the method if the teacher ID already exists
+        }
         // Find or create the teacher
         Teacher teacher = teachers.stream()
                 .filter(t -> t.getTeacherId().equals(teacherId))
@@ -141,6 +157,10 @@ public class Main {
         teacher.addCourse(course);
         System.out.println(
                 "Course " + course.getCourseName() + " has been assigned to teacher " + teacher.getTeacherName() + ".");
+    }
+
+    private static boolean teacherExists(String teacherId) {
+        return teachers.stream().anyMatch(teacher -> teacher.getTeacherId().equals(teacherId));
     }
 
     private static void recordAttendance() {
