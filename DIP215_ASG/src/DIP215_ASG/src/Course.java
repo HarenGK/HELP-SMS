@@ -10,6 +10,10 @@ public class Course {
     private String courseName;
     private int creditHours;
     private List<String> courseSchedule; // Use List for type flexibility
+    private List<Student> enrolledStudents = new ArrayList<>();
+    public List<Student> getStudentsEnrolled() {
+        return new ArrayList<>(enrolledStudents);
+    }
     private Map<Student, List<Boolean>> attendanceRecords; // Maps each student to their attendance record
     private Map<Student, Double> grades = new HashMap<>();
 
@@ -71,7 +75,7 @@ public class Course {
         attendanceRecords.put(student, attendanceList);
     }
 
-    private void displayAttendanceRecords() {
+    public void displayAttendanceRecords() {
         System.out.println("Attendance Records:");
         attendanceRecords.forEach((student, attendanceList) -> {
             System.out.println("Student ID: " + student.getStudentId() + " - " + student.getStudentName());
@@ -80,13 +84,34 @@ public class Course {
             }
         });
     }
+
+    public void enrollStudent(Student student) {
+        if (!enrolledStudents.contains(student)) {
+            enrolledStudents.add(student);
+            // Also initialize the attendance and grade records for the new student
+            attendanceRecords.put(student, new ArrayList<>());
+            grades.put(student, null); // Initialize with no grade
+        }
+    }
+
+    // Method to drop a student from the course
+    public void dropStudent(Student student) {
+        if (enrolledStudents.remove(student)) {
+            // Remove the student's attendance and grade records
+            attendanceRecords.remove(student);
+            grades.remove(student);
+        }
+    }
+
+
     public void setGrade(Student student, Double grade) {
-        if (!attendanceRecords.containsKey(student)) {
+        if (!enrolledStudents.contains(student)) {
             System.out.println("Student is not enrolled in this course.");
             return;
         }
         grades.put(student, grade);
     }
+
 
     // Method to get a grade for a student
     public Double getGrade(Student student) {

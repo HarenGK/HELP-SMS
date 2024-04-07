@@ -11,6 +11,10 @@ public class Student {
     private String studentType;
     private int totalCreditHours;
     private List<Course> coursesEnrolled;
+
+    public List<Course> getCoursesEnrolled() {
+        return new ArrayList<>(coursesEnrolled);
+    }
     private Map<Course, Double> courseGrades; // Map to keep track of grades for courses
 
     public Student(String studentID, String studentName, String studentType, int totalCreditHours) {

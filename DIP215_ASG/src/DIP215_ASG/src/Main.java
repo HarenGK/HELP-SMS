@@ -32,6 +32,15 @@ public class Main {
                     enterGrades();
                     break;
                 case 5:
+                    printGradesReport();
+                    break;
+                case 6:
+                    printAttendanceReport();
+                    break;
+                case 7:
+                    printTeacherAssignmentsReport();
+                    break;
+                case 8:
                     System.out.println("Exiting the School Management System. Goodbye!");
                     scanner.close();
                     return;
@@ -48,48 +57,52 @@ public class Main {
         System.out.println("2. Assign a course to a teacher");
         System.out.println("3. Record student attendance");
         System.out.println("4. Enter grades for a student");
-        System.out.println("5. Exit");
+        System.out.println("5. Print grades report");
+        System.out.println("6. Print attendance report");
+        System.out.println("7. Print teacher assignments report");
+        System.out.println("8. Exit");
         System.out.print("Enter choice: ");
         return scanner.nextInt();
     }
 
     private static void enrollStudent() {
-        System.out.println("Enter student ID: ");
-        String studentId = scanner.next();
-        scanner.nextLine(); // Consume the newline left-over
-        System.out.println("Enter student's name: ");
-        String studentName = scanner.nextLine();
-        System.out.println("Is the student full-time? (yes/no): ");
-        String isFullTime = scanner.next();
-        int creditHours = isFullTime.equalsIgnoreCase("yes") ?
-                FullTimeStudent.getFullTimeMinCredits() :
-                PartTimeStudent.getPartTimeMaxCredits(); // Assuming a similar getter exists in PartTimeStudent
+        System.out.print("Enter student ID: ");
+        String studentId = scanner.nextLine();
 
-        isFullTime = scanner.next();
+        System.out.print("Enter student's name: ");
+        String studentName = scanner.nextLine();
+
+        System.out.println("Is the student full-time? (yes/no): ");
+        String isFullTime = scanner.nextLine();
+
         boolean fullTime = isFullTime.equalsIgnoreCase("yes");
-        creditHours = fullTime ? FullTimeStudent.getFullTimeMinCredits() : PartTimeStudent.getPartTimeMaxCredits();
+        int creditHours = fullTime ? FullTimeStudent.getFullTimeMinCredits() : PartTimeStudent.getPartTimeMaxCredits();
 
         Student student;
         if (fullTime) {
-            System.out.println("Enter scholarship amount (or 0 if none): ");
-            while (!scanner.hasNextDouble()) {
-                System.out.println("Please enter a valid scholarship amount:");
-                scanner.next(); // Consume the invalid input
-            }
-            double scholarship = scanner.nextDouble();
-            scanner.nextLine(); // Consume the newline left-over
+            System.out.print("Enter scholarship amount (or 0 if none): ");
+            double scholarship = getValidDoubleInput();
             student = new FullTimeStudent(studentId, studentName, creditHours, scholarship);
         } else {
-            System.out.println("Is the student employed? (yes/no): ");
-            boolean isEmployed = scanner.next().equalsIgnoreCase("yes");
-            scanner.nextLine(); // Consume the newline left-over
+            System.out.print("Is the student employed? (yes/no): ");
+            boolean isEmployed = scanner.nextLine().equalsIgnoreCase("yes");
             student = new PartTimeStudent(studentId, studentName, creditHours, isEmployed);
         }
 
         students.add(student);
         System.out.println("Student " + studentName + " has been enrolled.");
-        scanner.nextLine(); // Consume the newline left-over
     }
+
+    private static double getValidDoubleInput() {
+        while (!scanner.hasNextDouble()) {
+            System.out.println("Please enter a valid number:");
+            scanner.next(); // Consume the invalid input
+        }
+        double value = scanner.nextDouble();
+        scanner.nextLine(); // Consume the newline left-over
+        return value;
+    }
+
 
 
     private static void assignCourseToTeacher() {
@@ -162,11 +175,41 @@ public class Main {
 
         if (course != null && student != null) {
             System.out.println("Enter grade:");
-            double grade = scanner.nextDouble();
+            double grade = getValidDoubleInput();
             student.setGrade(course, grade); // Assuming you add a method for setting grades in Student
             System.out.println("Grade entered.");
         } else {
             System.out.println("Course or student not found.");
+        }
+    }
+
+    private static void printGradesReport() {
+        System.out.println("\nGrades Report:");
+        for (Student student : students) {
+            System.out.println(student);
+            for (Course course : student.getCoursesEnrolled()) {
+                Double grade = student.getGrade(course);
+                String gradeStr = (grade == null) ? "N/A" : grade.toString();
+                System.out.println("\t" + course.getCourseName() + ": " + gradeStr);
+            }
+        }
+    }
+
+    private static void printAttendanceReport() {
+        System.out.println("\nAttendance Report:");
+        for (Course course : courses) {
+            System.out.println("Course: " + course.getCourseName());
+            course.displayAttendanceRecords();
+        }
+    }
+
+    private static void printTeacherAssignmentsReport() {
+        System.out.println("\nTeacher Assignments Report:");
+        for (Teacher teacher : teachers) {
+            System.out.println(teacher);
+            for (Course course : teacher.getCoursesTaught()) {
+                System.out.println("\t" + course.getCourseName() + ": " + course.getStudentsEnrolled().size() + " students");
+            }
         }
     }
 
@@ -189,11 +232,5 @@ public class Main {
         return null; // Student not found
     }
 
-    // In the Student class
-    private Map<Course, Double> courseGrades = new HashMap<>();
-
-    public void setGrade(Course course, double grade) {
-        courseGrades.put(course, grade);
-    }
 
 }
