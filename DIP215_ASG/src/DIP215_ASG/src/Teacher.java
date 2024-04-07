@@ -57,4 +57,8 @@ public class Teacher {
     public List<Course> getCoursesTaught() {
         return coursesTaught;
     }
+
+    public void setCoursesTaught(List<Course> coursesTaught) {
+        this.coursesTaught = new ArrayList<>(coursesTaught);
+    }
 }

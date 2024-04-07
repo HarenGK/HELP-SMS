@@ -1,8 +1,9 @@
 package DIP215_ASG.src;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Student {
     private String studentID;
@@ -11,12 +12,18 @@ public class Student {
     private int totalCreditHours;
     private List<Course> coursesEnrolled;
 
+    public List<Course> getCoursesEnrolled() {
+        return new ArrayList<>(coursesEnrolled);
+    }
+    private Map<Course, Double> courseGrades; // Map to keep track of grades for courses
+
     public Student(String studentID, String studentName, String studentType, int totalCreditHours) {
         this.studentID = studentID;
         this.studentName = studentName;
         this.studentType = studentType;
         this.totalCreditHours = totalCreditHours;
         this.coursesEnrolled = new ArrayList<>();
+        this.courseGrades = new HashMap<>(); // Initialize the grades map
     }
 
     public String getStudentId() {
@@ -53,24 +60,36 @@ public class Student {
 
     public void enrollCourse(Course course) {
         coursesEnrolled.add(course);
-        // Optionally update totalCreditHours here
+        totalCreditHours += course.getCreditHours(); // Update credit hours when enrolling in a course
+        courseGrades.put(course, null); // Initialize the grade for this course as null
     }
 
     public void dropCourse(Course course) {
-        coursesEnrolled.remove(course);
-        // Optionally update totalCreditHours here
+        if (coursesEnrolled.remove(course)) {
+            totalCreditHours -= course.getCreditHours(); // Update credit hours when dropping a course
+            courseGrades.remove(course); // Remove the grade entry for this course
+        }
     }
 
-    public List<Course> getCoursesEnrolled() {
-        return Collections.unmodifiableList(coursesEnrolled);
+    public void setGrade(Course course, double grade) {
+        if(coursesEnrolled.contains(course)) {
+            courseGrades.put(course, grade); // Set the grade for the course
+        } else {
+            System.out.println("Student not enrolled in course: " + course.getCourseName());
+        }
     }
+
+    public Double getGrade(Course course) {
+        return courseGrades.get(course); // Get the grade for the course
+    }
+
 
     @Override
-    public String toString(){
+    public String toString() {
         return "\nStudent ID: " + studentID +
                 "\nStudent Name: " + studentName +
                 "\nStudent Type: " + studentType +
-                "\nTotal Credit Hours: " + totalCreditHours +
-                "\nCourses Enrolled: \n" + getCoursesEnrolled() + "\n";
+                "\nTotal Credit Hours: " + totalCreditHours ;
+
     }
 }
