@@ -102,7 +102,7 @@ public class Main {
 
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
-                if (choice >= 1 && choice <= 9) {
+                if (choice >= 1 && choice <= 13) {
                     scanner.nextLine(); // Consume the newline left-over
                     return choice;
                 } else {
