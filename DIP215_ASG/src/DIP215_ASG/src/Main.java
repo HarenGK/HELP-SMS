@@ -136,7 +136,7 @@ public class Main {
         }
 
         students.add(student);
-        System.out.println("Student " + studentName + " (" + studentId + ") has been enrolled.");
+        System.out.println("Student " + studentName + " (" + studentId + ") has been registered.");
     }
 
     private static boolean studentExists(String studentId) {
