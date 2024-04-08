@@ -25,35 +25,30 @@ public class Main {
                 case 1:
                     enrollStudent();
                     break;
-
                 case 2:
-                    addNewCourse();
-                    break;
-
-                case 3:
                     assignCourseToTeacher();
                     break;
-                case 4:
+                case 3:
                     recordAttendance();
                     break;
-                case 5:
+                case 4:
                     enterGrades();
                     break;
-                case 6:
+                case 5:
                     printGradesReport();
                     break;
-                case 7:
+                case 6:
                     printAttendanceReport();
                     break;
-                case 8:
+                case 7:
                     printTeacherAssignmentsReport();
                     break;
 
-                case 9:
+                case 8:
                     printAllGradeReports();
                     break;
 
-                case 10:
+                case 9:
                     System.out.println("Exiting HELP School Management System. \nThank You!");
                     scanner.close();
                     return;
@@ -69,15 +64,14 @@ public class Main {
         while (true) {
             System.out.println("\nPlease choose an option:");
             System.out.println("1. Enroll a new student");
-            System.out.println("2. Create a new course");
-            System.out.println("3. Assign a course to a teacher");
-            System.out.println("4. Record student attendance");
-            System.out.println("5. Enter grades for a student");
-            System.out.println("6. Print grades report");
-            System.out.println("7. Print attendance report");
-            System.out.println("8. Print teacher assignments report");
-            System.out.println("9. Print all grade reports");
-            System.out.println("10. Exit");
+            System.out.println("2. Assign a course to a teacher");
+            System.out.println("3. Record student attendance");
+            System.out.println("4. Enter grades for a student");
+            System.out.println("5. Print grades report");
+            System.out.println("6. Print attendance report");
+            System.out.println("7. Print teacher assignments report");
+            System.out.println("8. Print all grade reports");
+            System.out.println("9. Exit");
             System.out.print("Enter choice: ");
 
             if (scanner.hasNextInt()) {
@@ -143,45 +137,7 @@ public class Main {
         return value;
     }
 
-    private static void addNewCourse() {
-        // Input validation for new course ID
-        String courseId;
-        do {
-            System.out.print("Enter new course ID: ");
-            courseId = scanner.nextLine();
-            if (courseExists(courseId)) {
-                System.out.println("A course with this ID already exists. Please enter a different ID.");
-            }
-        } while (courseExists(courseId)); // Repeat until a unique course ID is entered
 
-        // Input validation for new course name
-        System.out.print("Enter new course name: ");
-        String courseName = scanner.nextLine();
-
-        // Input validation for new course credit hours
-        double creditHours;
-        while (true) {
-            System.out.print("Enter new course credit hours: ");
-            if (scanner.hasNextDouble()) {
-                creditHours = scanner.nextDouble();
-                scanner.nextLine(); // Consume newline character
-                break; // Exit loop if a valid double is entered
-            } else {
-                System.out.println("Invalid input. Please enter a valid number for credit hours.");
-                scanner.nextLine(); // Consume invalid input
-            }
-        }
-
-        // Create and add the new course if input validation passes
-        Course course = new Course(courseId, courseName, creditHours);
-        courses.add(course);
-        System.out.println("Course added successfully.");
-    }
-
-
-    private static boolean courseExists(String courseId) {
-        return courses.stream().anyMatch(course -> course.getCourseId().equals(courseId));
-    }
 
     private static void assignCourseToTeacher() {
         System.out.println("Enter the teacher's ID: ");
