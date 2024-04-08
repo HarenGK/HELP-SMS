@@ -27,7 +27,7 @@ public class Main {
                     break;
 
                 case 2:
-                    addNewCourse();
+                    addNewCourses();
                     break;
 
                 case 3:
@@ -153,6 +153,21 @@ public class Main {
         return value;
     }
 
+    private static void addNewCourses() {
+        System.out.print("How many new courses would you like to enter? ");
+        int courseCount = getValidIntegerInput(); // Ensure that the user inputs a valid integer
+
+        for (int i = 0; i < courseCount; i++) {
+            System.out.println("Entering information for course number " + (i + 1));
+            addNewCourse();
+            // Optionally add a pause or confirmation before continuing
+            if (i < courseCount - 1) {
+                System.out.println("Press Enter to continue to the next course...");
+                scanner.nextLine();
+            }
+        }
+    }
+
     private static void addNewCourse() {
         // Input validation for new course ID
         String courseId;
@@ -186,6 +201,16 @@ public class Main {
         Course course = new Course(courseId, courseName, creditHours);
         courses.add(course);
         System.out.println("Course added successfully.");
+    }
+
+    private static int getValidIntegerInput() {
+        while (!scanner.hasNextInt()) {
+            System.out.println("That's not a valid number. Please enter a valid integer:");
+            scanner.next(); // Consume the invalid input
+        }
+        int number = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline left-over
+        return number;
     }
 
     private static void printAllCourses() {
