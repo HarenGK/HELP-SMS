@@ -156,7 +156,11 @@ public class Main {
                     String teacherName = scanner.next();
                     System.out.println("Enter teacher's qualifications: ");
                     String qualifications = scanner.next();
-                    Teacher newTeacher = new Teacher(teacherId, teacherName, qualifications);
+                    System.out.println("Enter teacher's email: ");
+                    String email = scanner.next();
+                    System.out.println("Enter teacher's contact number: ");
+                    int contactNo = scanner.nextInt();
+                    Teacher newTeacher = new Teacher(teacherId, teacherName, email, contactNo, qualifications);
                     teachers.add(newTeacher);
                     return newTeacher;
                 });
