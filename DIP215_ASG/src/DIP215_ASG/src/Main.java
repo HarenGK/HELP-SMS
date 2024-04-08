@@ -152,7 +152,7 @@ public class Main {
             student = new FullTimeStudent(studentId, studentName, creditHours, scholarship);
         } else {
             System.out.print("Is the student employed? (yes/no): ");
-            boolean isEmployed = getYesOrNoInput("Is the student employed?");
+            boolean isEmployed = getYesOrNoInput("Is the student employed? ");
             student = new PartTimeStudent(studentId, studentName, creditHours, isEmployed);
         }
 
@@ -311,7 +311,7 @@ public class Main {
 
             // Enroll the student in the course
             student.enrollCourse(course);
-            System.out.println("Student " + studentId + " enrolled in " + courseId + "course.");
+            System.out.println("Student " + studentId + " enrolled in " + courseId   +  "course.");
         }
     }
 
@@ -386,8 +386,9 @@ public class Main {
                 .filter(c -> c.getCourseId().equals(courseId))
                 .findFirst()
                 .orElseGet(() -> {
+                    scanner.nextLine();
                     System.out.println("Enter course name: ");
-                    String courseName = scanner.next();
+                    String courseName = scanner.nextLine();
                     System.out.println("Enter credit hours: ");
                     double creditHours = scanner.nextDouble ();
                     Course newCourse = new Course(courseId, courseName, creditHours);
