@@ -31,38 +31,46 @@ public class Main {
                     break;
 
                 case 3:
-                    printAllCourses();
+                    assignCourseToStudent();
                     break;
 
                 case 4:
-                    assignCourseToTeacher();
+                    dropCourseForStudent();
                     break;
 
                 case 5:
-                    recordAttendance();
+                    printAllCourses();
                     break;
 
                 case 6:
-                    enterGrades();
+                    assignCourseToTeacher();
                     break;
 
                 case 7:
-                    printGradesReport();
+                    recordAttendance();
                     break;
 
                 case 8:
-                    printAttendanceReport();
+                    enterGrades();
                     break;
 
                 case 9:
-                    printTeacherAssignmentsReport();
+                    printGradesReport();
                     break;
 
                 case 10:
-                    printAllGradeReports();
+                    printAttendanceReport();
                     break;
 
                 case 11:
+                    printTeacherAssignmentsReport();
+                    break;
+
+                case 12:
+                    printAllGradeReports();
+                    break;
+
+                case 13:
                     System.out.println("Exiting HELP School Management System. \nThank You!");
                     scanner.close();
                     return;
@@ -79,15 +87,17 @@ public class Main {
             System.out.println("\nPlease choose an option:");
             System.out.println("1. Enroll a new student");
             System.out.println("2. Create a new course");
-            System.out.println("3. Display all courses");
-            System.out.println("4. Assign a course to a teacher");
-            System.out.println("5. Record student attendance");
-            System.out.println("6. Enter grades for a student");
-            System.out.println("7. Print grades report");
-            System.out.println("8. Print attendance report");
-            System.out.println("9. Print teacher assignments report");
-            System.out.println("10. Print all grade reports");
-            System.out.println("11. Exit");
+            System.out.println("3. Assign course to students");
+            System.out.println("4. Drop course for students");
+            System.out.println("5. Display all courses");
+            System.out.println("6. Assign a course to a teacher");
+            System.out.println("7. Record student attendance");
+            System.out.println("8. Enter grades for a student");
+            System.out.println("9. Print grades report");
+            System.out.println("10. Print attendance report");
+            System.out.println("11. Print teacher assignments report");
+            System.out.println("12. Print all grade reports");
+            System.out.println("13. Exit");
             System.out.print("Enter choice: ");
 
             if (scanner.hasNextInt()) {
@@ -223,6 +233,64 @@ public class Main {
 
     private static boolean courseExists(String courseId) {
         return courses.stream().anyMatch(course -> course.getCourseId().equals(courseId));
+    }
+
+    private static void assignCourseToStudent() {
+        System.out.print("Course ID: ");
+        String courseId = scanner.nextLine();
+
+        // Check if the course exists
+        Course course = findCourseById(courseId);
+        if (course == null) {
+            System.out.println("Course not found.");
+            return;
+        }
+
+        System.out.print("Enter number of students: ");
+        int noOfStudents = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        for (int i = 0; i < noOfStudents; i++) {
+            System.out.print("Enter Student ID for student " + (i + 1) + ": ");
+            String studentId = scanner.nextLine();
+
+            // Check if the student exists
+            Student student = findStudentById(studentId);
+            if (student == null) {
+                System.out.println("Student with ID " + studentId + " not found.");
+                continue; // Continue to the next iteration if student not found
+            }
+
+            // Enroll the student in the course
+            student.enrollCourse(course);
+            System.out.println("Student " + studentId + " enrolled in course " + courseId + ".");
+        }
+    }
+
+    private static void dropCourseForStudent() {
+        System.out.print("Enter Course ID: ");
+        String courseId = scanner.nextLine();
+
+        // Check if the course exists
+        Course course = findCourseById(courseId);
+        if (course == null) {
+            System.out.println("Course not found.");
+            return;
+        }
+
+        System.out.print("Enter Student ID: ");
+        String studentId = scanner.nextLine();
+
+        // Check if the student exists
+        Student student = findStudentById(studentId);
+        if (student == null) {
+            System.out.println("Student not found.");
+            return;
+        }
+
+        // Drop the course for the student
+        student.dropCourse(course);
+        System.out.println("Course " + courseId + " dropped for student " + studentId + ".");
     }
 
 
