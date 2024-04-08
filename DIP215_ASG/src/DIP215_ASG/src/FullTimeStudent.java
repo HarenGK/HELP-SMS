@@ -5,7 +5,7 @@ public class FullTimeStudent extends Student {
     private double scholarship;
 
     public FullTimeStudent(String studentID, String studentName, int creditHours, double scholarship) {
-        super(studentID, studentName, "Full Time", Math.max(creditHours, FullTimeMinCredits));
+        super(studentID, studentName, "Full Time", Math.max(creditHours, FullTimeMinCredits)); // Ensure credit hours are at least FullTimeMinCredits
         this.scholarship = Math.max(0.0, scholarship); // Ensures scholarship amount is not negative
     }
 
@@ -24,8 +24,8 @@ public class FullTimeStudent extends Student {
         this.scholarship = Math.max(0.0, scholarship); // Ensure scholarship is not negative
     }
 
-    @Override
+    @Override // Override the toString method to include scholarship amount
     public String toString() {
-        return super.toString() + "\nScholarship Amount: " + getScholarship();
+        return super.toString() + "\nScholarship Amount (RM): " + getScholarship();
     }
 }

@@ -11,13 +11,15 @@ public class Teacher {
     private List<Course> coursesTaught;
     private String teacherQualifications;
 
+
+    // Constructor
     public Teacher(String teacherId, String teacherName, String teacherEmail, int teacherContactNo, String teacherQualifications) {
         this.teacherId = teacherId;
         this.teacherName = teacherName;
         this.teacherEmail = teacherEmail;
         this.teacherContactNo = teacherContactNo;
         this.teacherQualifications = teacherQualifications;
-        this.coursesTaught = new ArrayList<>();
+        this.coursesTaught = new ArrayList<>(); // Initialize the ArrayList of courses taught
     }
 
     public void addCourse(Course course) {
@@ -43,7 +45,7 @@ public class Teacher {
         }
     }
 
-
+    // Getters and Setters for the Teacher class
     public String getTeacherQualifications() {
         return teacherQualifications;
     }
@@ -94,5 +96,15 @@ public class Teacher {
 
     public void setCoursesTaught(List<Course> coursesTaught) {
         this.coursesTaught = new ArrayList<>(coursesTaught);
+    }
+
+    // Overriding the toString() method
+    @Override
+    public String toString() {
+        return "Teacher ID: " + teacherId +
+                "\nTeacher Name: " + teacherName +
+                "\nTeacher Email: " + teacherEmail +
+                "\nTeacher Contact Number: " + teacherContactNo +
+                "\nQualifications: " + teacherQualifications;
     }
 }
