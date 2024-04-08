@@ -129,7 +129,7 @@ public class Course {
     @Override
     public String toString() {
         return "Course ID: " + courseId +
-                ", Course Name: " + courseName +
-                ", Credit Hours: " + creditHours;
+                "\nCourse Name: " + courseName +
+                "\nCredit Hours: " + creditHours + "\n";
     }
 }

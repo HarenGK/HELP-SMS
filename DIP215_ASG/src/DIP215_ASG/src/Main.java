@@ -323,7 +323,7 @@ public class Main {
                         scanner.next(); // Discard the non-integer input
                     }
                     int contactNo = scanner.nextInt();
-                    scanner.nextLine(); // Consume the rest of the line after reading the integer
+                    //scanner.nextLine(); // Consume the rest of the line after reading the integer
 
                     Teacher newTeacher = new Teacher(teacherId, teacherName, email, contactNo, qualifications);
                     teachers.add(newTeacher);
