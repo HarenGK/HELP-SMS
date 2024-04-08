@@ -132,7 +132,6 @@ public class Main {
             }
         }
     }
-
     private static void enrollSingleStudent() {
         System.out.print("Enter student ID: ");
         String studentId = scanner.nextLine();
@@ -142,12 +141,9 @@ public class Main {
         }
 
         System.out.print("Enter student's name: ");
-        String studentName = scanner.nextLine();
+        String studentName = getNonEmptyLine("Enter student's name: ");
 
-        System.out.println("Is the student full-time? (yes/no): ");
-        String isFullTime = scanner.nextLine().toLowerCase();
-
-        boolean fullTime = isFullTime.equalsIgnoreCase("yes");
+        boolean fullTime = getYesOrNoInput("Is the student full-time? Please enter 'YES' or 'NO': ");
         int creditHours = fullTime ? FullTimeStudent.getFullTimeMinCredits() : PartTimeStudent.getPartTimeMaxCredits();
 
         Student student;
@@ -157,13 +153,40 @@ public class Main {
             student = new FullTimeStudent(studentId, studentName, creditHours, scholarship);
         } else {
             System.out.print("Is the student employed? (yes/no): ");
-            boolean isEmployed = scanner.nextLine().equalsIgnoreCase("yes");
+            boolean isEmployed = getYesOrNoInput("Is the student employed?");
             student = new PartTimeStudent(studentId, studentName, creditHours, isEmployed);
         }
 
         students.add(student);
         System.out.println("Student " + studentName + " (" + studentId + ") has been registered.");
     }
+
+    private static boolean getYesOrNoInput(String question) {
+        String input;
+        do {
+            System.out.print(question);
+            input = scanner.nextLine().trim().toLowerCase();
+            if(input.equals("yes") || input.equals("no")) {
+                return input.equals("yes");
+            } else {
+                System.out.println("Invalid input. Please enter 'YES' or 'NO'.");
+            }
+        } while(true);
+    }
+
+    private static String getNonEmptyLine(String prompt) {
+        String input;
+        do {
+            System.out.print(prompt);
+            input = scanner.nextLine().trim(); // Trim to remove leading and trailing whitespace
+            if (input.isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter some text.");
+            }
+        } while (input.isEmpty());
+        return input;
+    }
+
+
     private static int getValidIntegerInput1() {
         while (!scanner.hasNextInt()) {
             System.out.println("That's not a valid number. Please enter a valid integer:");
