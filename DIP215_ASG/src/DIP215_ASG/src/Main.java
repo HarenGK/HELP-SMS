@@ -23,7 +23,7 @@ public class Main {
             int choice = getMenuChoice();
             switch (choice) {
                 case 1:
-                    enrollStudent();
+                    enrollStudents();
                     break;
 
                 case 2:
@@ -102,22 +102,38 @@ public class Main {
 
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
-                if (choice >= 1 && choice <= 9) {
-                    scanner.nextLine(); // Consume the newline left-over
+                scanner.nextLine(); // Consume the newline left-over
+                if (choice >= 1 && choice <= 13) { // Updated to include all menu options
                     return choice;
                 } else {
-                    System.out.println("Invalid choice. Please enter a number between 1 and 9.");
+                    System.out.println("Invalid choice. Please enter a number between 1 and 13."); // Updated message
                 }
             } else {
                 System.out.println("Invalid input. Please enter a number.");
                 scanner.next(); // Consume the non-integer input
             }
-            // It's important to clear the newline character in the case of invalid input
-            scanner.nextLine();
+            scanner.nextLine(); // It's important to clear the newline character in the case of invalid input
+        }
+    }
+    private static void enrollStudents() {
+        System.out.print("How many students would you like to enroll? ");
+        int studentCount = getValidIntegerInput1();
+
+        scanner.nextLine(); // Clear buffer after number input
+
+        for (int i = 0; i < studentCount; i++) {
+            System.out.println("Entering information for student number " + (i + 1) + ":");
+            enrollSingleStudent();
+
+            // Optionally add a pause or confirmation before continuing
+            if (i < studentCount - 1) {
+                System.out.println("Press Enter to continue to the next student...");
+                scanner.nextLine();
+            }
         }
     }
 
-    private static void enrollStudent() {
+    private static void enrollSingleStudent() {
         System.out.print("Enter student ID: ");
         String studentId = scanner.nextLine();
         if (studentExists(studentId)) {
@@ -148,6 +164,16 @@ public class Main {
         students.add(student);
         System.out.println("Student " + studentName + " (" + studentId + ") has been registered.");
     }
+    private static int getValidIntegerInput1() {
+        while (!scanner.hasNextInt()) {
+            System.out.println("That's not a valid number. Please enter a valid integer:");
+            scanner.next(); // Consume the invalid input
+        }
+        int number = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline left-over
+        return number;
+    }
+
 
     private static boolean studentExists(String studentId) {
         return students.stream().anyMatch(student -> student.getStudentId().equals(studentId));
