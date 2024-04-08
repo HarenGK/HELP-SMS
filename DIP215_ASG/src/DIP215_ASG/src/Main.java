@@ -208,7 +208,7 @@ public class Main {
         // Input validation for new course ID
         String courseId;
         do {
-            System.out.print("Enter new course ID: ");
+            System.out.print("Enter the new course ID: ");
             courseId = scanner.nextLine();
             if (courseExists(courseId)) {
                 System.out.println("A course with this ID already exists. Please enter a different ID.");
@@ -216,19 +216,19 @@ public class Main {
         } while (courseExists(courseId)); // Repeat until a unique course ID is entered
 
         // Input validation for new course name
-        System.out.print("Enter new course name: ");
+        System.out.print("Enter " + courseId + " course name: ");
         String courseName = scanner.nextLine();
 
         // Input validation for new course credit hours
         double creditHours;
         while (true) {
-            System.out.print("Enter new course credit hours: ");
+            System.out.print("Enter " + courseId + " course credit hours: ");
             if (scanner.hasNextDouble()) {
                 creditHours = scanner.nextDouble();
                 scanner.nextLine(); // Consume newline character
                 break; // Exit loop if a valid double is entered
             } else {
-                System.out.println("Invalid input. Please enter a valid number for credit hours.");
+                System.out.println("Invalid input. Please enter a valid number for credit hours. (E.g, 4.00)");
                 scanner.nextLine(); // Consume invalid input
             }
         }
@@ -236,7 +236,7 @@ public class Main {
         // Create and add the new course if input validation passes
         Course course = new Course(courseId, courseName, creditHours);
         courses.add(course);
-        System.out.println("Course added successfully.");
+        System.out.println(courseName + "(" + courseId + ") added successfully to course list");
     }
 
     private static int getValidIntegerInput() {
@@ -289,7 +289,7 @@ public class Main {
 
             // Enroll the student in the course
             student.enrollCourse(course);
-            System.out.println("Student " + studentId + " enrolled in course " + courseId + ".");
+            System.out.println("Student " + studentId + " enrolled in " + courseId + "course.");
         }
     }
 
@@ -340,7 +340,7 @@ public class Main {
                     System.out.println("Enter teacher's qualifications: ");
                     String qualifications = scanner.nextLine(); // Use nextLine() to capture full qualifications input
 
-                    System.out.println("Enter teacher's email: ");
+                    System.out.println("Enter teacher's work email: ");
                     String email = scanner.nextLine(); // Use nextLine() to capture full email input
 
                     System.out.println("Enter teacher's contact number: ");
@@ -375,7 +375,7 @@ public class Main {
 
         teacher.addCourse(course);
         System.out.println(
-                "Course " + course.getCourseName() + " (" + course.getCreditHours () + ") has been assigned to teacher " + teacher.getTeacherName() + "(" + teacher.getTeacherId () + ")");
+                "Course " + course.getCourseName() + " (" + course.getCourseId () + ") has been assigned to teacher " + teacher.getTeacherName() + "(" + teacher.getTeacherId () + ")");
     }
 
     private static boolean teacherExists(String teacherId) {
@@ -383,7 +383,7 @@ public class Main {
     }
 
     private static void recordAttendance() {
-        System.out.println("Recording attendance...");
+        System.out.println("\nStudent's Attendance Recording System Initialized...");
         // Assuming you have a method to select a course and student
         System.out.println("Enter course ID:");
         String courseId = scanner.next();
@@ -397,13 +397,13 @@ public class Main {
             System.out.println("Mark student as present? (yes/no):");
             boolean isPresent = scanner.next().equalsIgnoreCase("yes");
             course.recordAttendance(student, isPresent);
-            System.out.println("Attendance recorded.");
+            System.out.println("Attendance of " + studentId + " recorded.");
         } else {
             System.out.println("Course or student not found.");
         }
     }
 
-    private static void enterGrades() {
+    private static void enterGrades() {System.out.println("Student's Grades Recording System Initialized...\n");
         System.out.println("Enter course ID for grade entry:");
         String courseId = scanner.next();
         Course course = findCourseById(courseId);
@@ -415,15 +415,16 @@ public class Main {
         if (course != null && student != null) {
             System.out.println("Enter grade:");
             double grade = getValidDoubleInput();
-            student.setGrade(course, grade); // Assuming you add a method for setting grades in Student
-            System.out.println("Grade entered.");
+            student.setGrade(course, grade); // Set the grade for the student in the course
+            System.out.println("Grade for " + studentId + " recorded.");
         } else {
             System.out.println("Course or student not found.");
         }
     }
 
     private static void printGradesReport() {
-        System.out.println("\nGrades Report:");
+        System.out.println("\nGenerating Student Grade Reports...\n");
+        System.out.println ("\nStudent Grade Report:");
         for (Student student : students) {
             System.out.println(student);
             for (Course course : student.getCoursesEnrolled()) {
@@ -435,6 +436,7 @@ public class Main {
     }
 
     private static void printAttendanceReport() {
+        System.out.println ("\nGenerating Attendance Report...\n");
         System.out.println("\nAttendance Report:");
         for (Course course : courses) {
             System.out.println("Course: " + course.getCourseName());
@@ -443,6 +445,7 @@ public class Main {
     }
 
     private static void printTeacherAssignmentsReport() {
+        System.out.println("\nGenerating Teacher Assignments Report...\n");
         System.out.println("\nTeacher Assignments Report:");
         for (Teacher teacher : teachers) {
             System.out.println(teacher);
@@ -454,7 +457,8 @@ public class Main {
 
     // Method to print grade reports for all students
     private static void printAllGradeReports() {
-        System.out.println("Grade Reports for All Students:");
+        System.out.println ("\nGenerating Grade Reports for Students...\n");
+        System.out.println("Grade Reports of all Students:");
         for (Student student : students) {
             System.out.println(student.generateTranscript());
         }
