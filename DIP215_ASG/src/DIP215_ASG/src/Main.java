@@ -119,7 +119,7 @@ public class Main {
         System.out.print("How many students would you like to enroll? ");
         int studentCount = getValidIntegerInput1();
 
-        scanner.nextLine(); // Clear buffer after number input
+        //scanner.nextLine(); // Clear buffer after number input
 
         for (int i = 0; i < studentCount; i++) {
             System.out.println("Entering information for student number " + (i + 1) + ":");
@@ -157,7 +157,7 @@ public class Main {
         }
 
         students.add(student);
-        System.out.println("Student " + studentName + " (" + studentId + ") has been registered.");
+        System.out.println("\nStudent, " + studentName + " (" + studentId + ") has been registered.");
     }
 
     private static boolean getYesOrNoInput(String question) {
@@ -258,7 +258,7 @@ public class Main {
         // Create and add the new course if input validation passes
         Course course = new Course(courseId, courseName, creditHours);
         courses.add(course);
-        System.out.println(courseName + "(" + courseId + ") added successfully to course list");
+        System.out.println(courseName + " (" + courseId + ") added successfully to course list");
     }
 
     private static int getValidIntegerInput() {
@@ -272,6 +272,7 @@ public class Main {
     }
 
     private static void printAllCourses() {
+        System.out.println ("\nDisplaying all available courses...\n");
         System.out.println("\nAll Courses:");
         for (Course course : courses) {
             System.out.println(course); // Print the course details
@@ -311,11 +312,12 @@ public class Main {
 
             // Enroll the student in the course
             student.enrollCourse(course);
-            System.out.println("Student " + studentId + " enrolled in " + courseId   +  "course.");
+            System.out.println("Student " + studentId + " enrolled in " + courseId   +  " course.");
         }
     }
 
     private static void dropCourseForStudent() {
+        System.out.print("\nDrop Course for Student\n");
         System.out.print("Enter Course ID: ");
         String courseId = scanner.nextLine();
 
@@ -464,6 +466,7 @@ public class Main {
         for (Course course : courses) {
             System.out.println("Course: " + course.getCourseName());
             course.displayAttendanceRecords();
+            System.out.println ("-----------------------------------");
         }
     }
 
