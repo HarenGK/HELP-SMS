@@ -68,9 +68,14 @@ public class Student {
     public void dropCourse(Course course) {
         if (coursesEnrolled.remove(course)) {
             totalCreditHours -= course.getCreditHours(); // Update credit hours when dropping a course
+            // Ensure that totalCreditHours doesn't become negative
+            if (totalCreditHours < 0) {
+                totalCreditHours = 0;
+            }
             courseGrades.remove(course); // Remove the grade entry for this course
         }
     }
+
 
     public void setGrade(Course course, double grade) {
         if(coursesEnrolled.contains(course)) {
