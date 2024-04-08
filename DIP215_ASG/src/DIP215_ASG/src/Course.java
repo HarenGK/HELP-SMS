@@ -78,9 +78,11 @@ public class Course {
     public void displayAttendanceRecords() {
         System.out.println("Attendance Records:");
         attendanceRecords.forEach((student, attendanceList) -> {
-            System.out.println("Student ID: " + student.getStudentId() + " - " + student.getStudentName());
+            // Assume the longest student ID and name is less than 30 characters
+            // Adjust the 30 in the format to fit your actual data if necessary
+            System.out.format("%-30s - %-5s", "Student ID: " + student.getStudentId(), student.getStudentName());
             for (Boolean present : attendanceList) {
-                System.out.println("\t" + (present ? "Present" : "Absent"));
+                System.out.format("%-5s%n", (present ? "Present" : "Absent"));
             }
         });
     }
