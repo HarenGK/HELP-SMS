@@ -24,7 +24,7 @@ public class Student {
         this.studentType = studentType;
         this.totalCreditHours = totalCreditHours;
         this.coursesEnrolled = new ArrayList<>();
-        this.courseGrades = new HashMap<>(); // Initialize the grades map
+        this.courseGrades = new HashMap<>(); // Initialize the grades map where vales are stored in pairs such as (Course, Grade)
     }
 
     public String getStudentId() {
@@ -86,7 +86,7 @@ public class Student {
     }
 
     public Double getGrade(Course course) {
-        return courseGrades.get(course); // Get the grade for the course
+        return courseGrades.get(course); // Gets the grade for the course
     }
 
     // Method to generate a transcript for a student
