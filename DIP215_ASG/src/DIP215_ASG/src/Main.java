@@ -430,11 +430,11 @@ public class Main {
 
     private static void enterGrades() {System.out.println("Student's Grades Recording System Initialized...\n");
         System.out.println("Enter course ID for grade entry:");
-        String courseId = scanner.next();
-        Course course = findCourseById(courseId);
+        String courseId = scanner.nextLine();
+        Course course = findCourseById2(courseId);
 
         System.out.println("Enter student ID:");
-        String studentId = scanner.next();
+        String studentId = scanner.nextLine();
         Student student = findStudentById(studentId);
 
         if (course != null && student != null) {
@@ -445,6 +445,13 @@ public class Main {
         } else {
             System.out.println("Course or student not found.");
         }
+    }
+    private static Course findCourseById2(String courseId) {
+        String sanitizedCourseId = courseId.replaceAll("\\s+", ""); // Remove all spaces
+        return courses.stream()
+                .filter(c -> c.getCourseId().replaceAll("\\s+", "").equalsIgnoreCase(sanitizedCourseId))
+                .findFirst()
+                .orElse(null); // Return null if course not found
     }
 
     private static void printGradesReport() {
