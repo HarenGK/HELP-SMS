@@ -4,9 +4,9 @@ public class PartTimeStudent extends Student {
     private static final int PartTimeMaxCredits = 8; // Example, assuming part-time students can enroll in a maximum of 8 credits
     private boolean employmentStatus;
 
-    public PartTimeStudent(String studentID, String studentName, int creditHours, boolean employmentStatus) {
-        super(studentID, studentName, "Part Time", Math.min(creditHours, PartTimeMaxCredits));
-        this.employmentStatus = employmentStatus;
+    public PartTimeStudent(String studentID, String studentName, int creditHours, boolean employmentStatus) { // Constructor
+        super(studentID, studentName, "Part Time", Math.min(creditHours, PartTimeMaxCredits)); // Call the superclass constructor  and set the credit hours to the minimum of the input and the maximum allowed
+        this.employmentStatus = employmentStatus; // Set the employment status
     }
 
     // Public static getter for PartTimeMaxCredits
