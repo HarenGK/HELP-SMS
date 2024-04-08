@@ -6,12 +6,16 @@ import java.util.List;
 public class Teacher {
     private String teacherId;
     private String teacherName;
+    private String teacherEmail;
+    private int teacherContactNo;
     private List<Course> coursesTaught;
     private String teacherQualifications;
 
-    public Teacher(String teacherId, String teacherName, String teacherQualifications) {
+    public Teacher(String teacherId, String teacherName, String teacherEmail, int teacherContactNo, String teacherQualifications) {
         this.teacherId = teacherId;
         this.teacherName = teacherName;
+        this.teacherEmail = teacherEmail;
+        this.teacherContactNo = teacherContactNo;
         this.teacherQualifications = teacherQualifications;
         this.coursesTaught = new ArrayList<>();
     }
@@ -23,6 +27,8 @@ public class Teacher {
     public void printTeacherInfo() {
         System.out.println("Teacher ID: " + teacherId);
         System.out.println("Teacher Name: " + teacherName);
+        System.out.println("Teacher Email: " + teacherEmail);
+        System.out.println("Teacher Contact Number: " + teacherContactNo);
         System.out.println("Qualifications: " + teacherQualifications);
         System.out.println("Courses Assigned:");
         for (Course course : coursesTaught) {
@@ -52,6 +58,22 @@ public class Teacher {
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
+    }
+
+    public String getTeacherEmail() {
+        return teacherEmail;
+    }
+
+    public void setTeacherEmail(String teacherEmail) {
+        this.teacherEmail = teacherEmail;
+    }
+
+    public int getTeacherContactNo() {
+        return teacherContactNo;
+    }
+
+    public void setTeacherContactNo(int teacherContactNo) {
+        this.teacherContactNo = teacherContactNo;
     }
 
     public List<Course> getCoursesTaught() {
