@@ -140,7 +140,6 @@ public class Main {
             return; // Exit the method if the student ID already exists
         }
 
-        System.out.print("Enter student's name: ");
         String studentName = getNonEmptyLine("Enter student's name: ");
 
         boolean fullTime = getYesOrNoInput("Is the student full-time? Please enter 'YES' or 'NO': ");
