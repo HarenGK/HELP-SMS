@@ -91,7 +91,6 @@ public class Main {
         }
     }
 
-
     private static void enrollStudent() {
         System.out.print("Enter student ID: ");
         String studentId = scanner.nextLine();
@@ -104,7 +103,7 @@ public class Main {
         String studentName = scanner.nextLine();
 
         System.out.println("Is the student full-time? (yes/no): ");
-        String isFullTime = scanner.nextLine();
+        String isFullTime = scanner.nextLine().toLowerCase();
 
         boolean fullTime = isFullTime.equalsIgnoreCase("yes");
         int creditHours = fullTime ? FullTimeStudent.getFullTimeMinCredits() : PartTimeStudent.getPartTimeMaxCredits();
