@@ -125,4 +125,11 @@ public class Course {
         System.out.println("Grades for Course: " + courseName);
         grades.forEach((student, grade) -> System.out.println(student.getStudentName() + ": " + grade));
     }
+
+    @Override
+    public String toString() {
+        return "Course ID: " + courseId +
+                ", Course Name: " + courseName +
+                ", Credit Hours: " + creditHours;
+    }
 }

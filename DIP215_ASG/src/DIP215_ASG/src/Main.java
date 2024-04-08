@@ -31,29 +31,38 @@ public class Main {
                     break;
 
                 case 3:
+                    printAllCourses();
+                    break;
+
+                case 4:
                     assignCourseToTeacher();
                     break;
-                case 4:
+
+                case 5:
                     recordAttendance();
                     break;
-                case 5:
+
+                case 6:
                     enterGrades();
                     break;
-                case 6:
+
+                case 7:
                     printGradesReport();
                     break;
-                case 7:
-                    printAttendanceReport();
-                    break;
+
                 case 8:
-                    printTeacherAssignmentsReport();
+                    printAttendanceReport();
                     break;
 
                 case 9:
-                    printAllGradeReports();
+                    printTeacherAssignmentsReport();
                     break;
 
                 case 10:
+                    printAllGradeReports();
+                    break;
+
+                case 11:
                     System.out.println("Exiting HELP School Management System. \nThank You!");
                     scanner.close();
                     return;
@@ -70,14 +79,15 @@ public class Main {
             System.out.println("\nPlease choose an option:");
             System.out.println("1. Enroll a new student");
             System.out.println("2. Create a new course");
-            System.out.println("3. Assign a course to a teacher");
-            System.out.println("4. Record student attendance");
-            System.out.println("5. Enter grades for a student");
-            System.out.println("6. Print grades report");
-            System.out.println("7. Print attendance report");
-            System.out.println("8. Print teacher assignments report");
-            System.out.println("9. Print all grade reports");
-            System.out.println("10. Exit");
+            System.out.println("3. Display all courses");
+            System.out.println("4. Assign a course to a teacher");
+            System.out.println("5. Record student attendance");
+            System.out.println("6. Enter grades for a student");
+            System.out.println("7. Print grades report");
+            System.out.println("8. Print attendance report");
+            System.out.println("9. Print teacher assignments report");
+            System.out.println("10. Print all grade reports");
+            System.out.println("11. Exit");
             System.out.print("Enter choice: ");
 
             if (scanner.hasNextInt()) {
@@ -176,6 +186,13 @@ public class Main {
         Course course = new Course(courseId, courseName, creditHours);
         courses.add(course);
         System.out.println("Course added successfully.");
+    }
+
+    private static void printAllCourses() {
+        System.out.println("\nAll Courses:");
+        for (Course course : courses) {
+            System.out.println(course); // Assuming that the Course class has a meaningful toString() override
+        }
     }
 
 
