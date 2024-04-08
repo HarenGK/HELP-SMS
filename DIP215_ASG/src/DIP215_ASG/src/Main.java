@@ -148,18 +148,28 @@ public class Main {
             return; // Exit the method if the teacher ID already exists
         }
         // Find or create the teacher
+// Find or create the teacher
         Teacher teacher = teachers.stream()
                 .filter(t -> t.getTeacherId().equals(teacherId))
                 .findFirst()
                 .orElseGet(() -> {
                     System.out.println("Enter teacher's name: ");
-                    String teacherName = scanner.next();
+                    String teacherName = scanner.nextLine(); // Use nextLine() to capture full name input
+
                     System.out.println("Enter teacher's qualifications: ");
-                    String qualifications = scanner.next();
+                    String qualifications = scanner.nextLine(); // Use nextLine() to capture full qualifications input
+
                     System.out.println("Enter teacher's email: ");
-                    String email = scanner.next();
+                    String email = scanner.nextLine(); // Use nextLine() to capture full email input
+
                     System.out.println("Enter teacher's contact number: ");
+                    while (!scanner.hasNextInt()) { // Check if the next input is an integer
+                        System.out.println("Please enter a valid contact number (digits only):");
+                        scanner.next(); // Discard the non-integer input
+                    }
                     int contactNo = scanner.nextInt();
+                    scanner.nextLine(); // Consume the rest of the line after reading the integer
+
                     Teacher newTeacher = new Teacher(teacherId, teacherName, email, contactNo, qualifications);
                     teachers.add(newTeacher);
                     return newTeacher;

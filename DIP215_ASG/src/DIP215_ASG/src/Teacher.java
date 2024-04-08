@@ -21,7 +21,12 @@ public class Teacher {
     }
 
     public void addCourse(Course course) {
-        this.coursesTaught.add(course);
+        // Check if the course is already taught by the teacher
+        if (this.coursesTaught.stream().noneMatch(c -> c.getCourseId().equals(course.getCourseId()))) {
+            this.coursesTaught.add(course);
+        } else {
+            System.out.println("This course is already assigned to the teacher.");
+        }
     }
 
     public void printTeacherInfo() {
@@ -31,10 +36,13 @@ public class Teacher {
         System.out.println("Teacher Contact Number: " + teacherContactNo);
         System.out.println("Qualifications: " + teacherQualifications);
         System.out.println("Courses Assigned:");
-        for (Course course : coursesTaught) {
-            System.out.println("- " + course.getCourseName());
+        for (Course course : this.coursesTaught) {
+            // If you already have a method getStudentsEnrolled() in the Course class:
+            List<Student> enrolledStudents = course.getStudentsEnrolled();
+            System.out.println("- " + course.getCourseName() + ": " + enrolledStudents.size() + " students enrolled");
         }
     }
+
 
     public String getTeacherQualifications() {
         return teacherQualifications;
@@ -65,7 +73,11 @@ public class Teacher {
     }
 
     public void setTeacherEmail(String teacherEmail) {
-        this.teacherEmail = teacherEmail;
+        if (teacherEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$")) { // Simple regex for email validation
+            this.teacherEmail = teacherEmail;
+        } else {
+            System.out.println("Invalid email format.");
+        }
     }
 
     public int getTeacherContactNo() {
