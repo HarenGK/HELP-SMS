@@ -252,7 +252,7 @@ public class Main {
     private static void printAllCourses() {
         System.out.println("\nAll Courses:");
         for (Course course : courses) {
-            System.out.println(course); // Assuming that the Course class has a meaningful toString() override
+            System.out.println(course); // Print the course details
         }
     }
 
