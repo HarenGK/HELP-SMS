@@ -61,20 +61,34 @@ public class Main {
     }
 
     private static int getMenuChoice() {
-        System.out.println("\nPlease choose an option:");
-        System.out.println("1. Enroll a new student");
-        System.out.println("2. Assign a course to a teacher");
-        System.out.println("3. Record student attendance");
-        System.out.println("4. Enter grades for a student");
-        System.out.println("5. Print grades report");
-        System.out.println("6. Print attendance report");
-        System.out.println("7. Print teacher assignments report");
-        System.out.println("8. Print all grade reports");
-        System.out.println("9. Exit");
-        System.out.print("Enter choice: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline left-over
-        return choice;
+        while (true) {
+            System.out.println("\nPlease choose an option:");
+            System.out.println("1. Enroll a new student");
+            System.out.println("2. Assign a course to a teacher");
+            System.out.println("3. Record student attendance");
+            System.out.println("4. Enter grades for a student");
+            System.out.println("5. Print grades report");
+            System.out.println("6. Print attendance report");
+            System.out.println("7. Print teacher assignments report");
+            System.out.println("8. Print all grade reports");
+            System.out.println("9. Exit");
+            System.out.print("Enter choice: ");
+
+            if (scanner.hasNextInt()) {
+                int choice = scanner.nextInt();
+                if (choice >= 1 && choice <= 9) {
+                    scanner.nextLine(); // Consume the newline left-over
+                    return choice;
+                } else {
+                    System.out.println("Invalid choice. Please enter a number between 1 and 9.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next(); // Consume the non-integer input
+            }
+            // It's important to clear the newline character in the case of invalid input
+            scanner.nextLine();
+        }
     }
 
 
