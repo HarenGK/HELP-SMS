@@ -10,20 +10,24 @@ public class Course {
     private String courseId;
     private String courseName;
     private double creditHours;
-    private List<String> courseSchedule; // Use List for type flexibility
-    private List<Student> enrolledStudents = new ArrayList<>(); // List of students enrolled in the course
-    public List<Student> getStudentsEnrolled() { // Getter method for enrolledStudents
+    private String scheduleDate;
+    private String scheduleTime;
+    private String scheduleDuration;
+    private List<Student> enrolledStudents = new ArrayList<>();
+    public List<Student> getStudentsEnrolled() {
         return new ArrayList<>(enrolledStudents);
     }
     private Map<Student, List<Boolean>> attendanceRecords; // Maps each student to their attendance record
     private Map<Student, Double> grades = new HashMap<>();
 
     // Constructor and methods providing controlled access to private variables
-    public Course(String courseId, String courseName, double creditHours) {
+    public Course(String courseId, String courseName, double creditHours, String scheduleDate, String scheduleTime, String scheduleDuration) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.creditHours = creditHours;
-        this.courseSchedule = new ArrayList<>(); // Initialize the ArrayList
+        this.scheduleDate = scheduleDate;
+        this.scheduleTime = scheduleTime;
+        this.scheduleDuration = scheduleDuration;
         this.attendanceRecords = new HashMap<>(); // Initialize the HashMap
         this.grades = new HashMap<>(); // Initialize the grades map
     }
@@ -53,23 +57,28 @@ public class Course {
         this.creditHours = creditHours;
     }
 
-    public List<String> getCourseSchedule() {
-        return new ArrayList<>(courseSchedule); // Return a copy of the courseSchedule list
+    public String getScheduleDate() {
+        return scheduleDate;
     }
 
-    public void addSchedule(String schedule) {
-        courseSchedule.add(schedule);
+    public void setScheduleDate(String scheduleDate) {
+        this.scheduleDate = scheduleDate;
     }
 
-    public void displayCourseInfo() {
-        System.out.println("Course ID: " + courseId);
-        System.out.println("Course Name: " + courseName);
-        System.out.println("Course Credit Hours: " + creditHours);
-        System.out.println("Course Schedule: ");
-        for (String schedule : courseSchedule) {
-            System.out.println(schedule);
-        }
-        displayAttendanceRecords();
+    public String getScheduleTime() {
+        return scheduleTime;
+    }
+
+    public void setScheduleTime(String scheduleTime) {
+        this.scheduleTime = scheduleTime;
+    }
+
+    public String getScheduleDuration() {
+        return scheduleDuration;
+    }
+
+    public void setScheduleDuration(String scheduleDuration) {
+        this.scheduleDuration = scheduleDuration;
     }
 
     public void recordAttendance(Student student, boolean isPresent) {
@@ -136,6 +145,9 @@ public class Course {
     public String toString() {
         return "Course ID: " + courseId +
                 "\nCourse Name: " + courseName +
-                "\nCredit Hours: " + creditHours + "\n";
+                "\nCredit Hours: " + creditHours +
+                "\nCourse Date: " + scheduleDate +
+                "\nCourse Time: " + scheduleTime +
+                "\nCourse Duration: " + scheduleDuration + "\n";
     }
 }

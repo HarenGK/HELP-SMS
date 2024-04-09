@@ -272,8 +272,37 @@ public class Main {
             }
         }
 
+        // Input validation for new course date
+        String courseDate;
+        boolean isValidDate = false;
+        do {
+            System.out.print("Enter " + courseId + " course date (Monday/Tuesday/Wednesday/Thursday/Friday): ");
+            courseDate = scanner.next();
+            // Perform input validation using switch statement
+            switch (courseDate.toLowerCase()) {
+                case "monday":
+                case "tuesday":
+                case "wednesday":
+                case "thursday":
+                case "friday":
+                    isValidDate = true;
+                    break;
+                default:
+                    System.out.println("Invalid input! Please enter a valid day (Monday/Tuesday/Wednesday/Thursday/Friday).");
+                    break;
+            }
+        } while (!isValidDate);
+
+        // Input validation for new course time
+        System.out.print("Enter " + courseId + " course time: ");
+        String courseTime = scanner.nextLine();
+
+        // Input validation for new course duration
+        System.out.print("Enter " + courseId + " course duration: ");
+        String courseDuration = scanner.nextLine();
+
         // Create and add the new course if input validation passes
-        Course course = new Course(courseId, courseName, creditHours);
+        Course course = new Course(courseId, courseName, creditHours, courseDate, courseTime, courseDuration);
         courses.add(course);
         System.out.println(courseName + " (" + courseId + ") added successfully to course list");
     }
@@ -417,17 +446,47 @@ public class Main {
 
             System.out.println("Enter credit hours: ");
             double creditHours = scanner.nextDouble();
+
+            // Input validation for new course date
+            String courseDate;
+            boolean isValidDate = false;
+            do {
+                System.out.print("Enter " + courseId + " course date (Monday/Tuesday/Wednesday/Thursday/Friday): ");
+                courseDate = scanner.next();
+                // Perform input validation using switch statement
+                switch (courseDate.toLowerCase()) {
+                    case "monday":
+                    case "tuesday":
+                    case "wednesday":
+                    case "thursday":
+                    case "friday":
+                        isValidDate = true;
+                        break;
+                    default:
+                        System.out.println("Invalid input! Please enter a valid weekday (Monday/Tuesday/Wednesday/Thursday/Friday).");
+                        break;
+                }
+            } while (!isValidDate);
+
+            // Input for new course time
+            System.out.print("Enter " + courseId + " course time: ");
+            String courseTime = scanner.next();
+
+            // Input for new course duration
+            System.out.print("Enter " + courseId + " course duration: ");
+            String courseDuration = scanner.next();
+
             scanner.nextLine(); // Consume the newline left-over
 
             // Create a new course object
-            course = new Course(courseId, courseName, creditHours);
+            course = new Course(courseId, courseName, creditHours, courseDate, courseTime, courseDuration);
             courses.add(course); // Add the new course to the list of courses
         }
 
         // Assign the course to the teacher
         teacher.addCourse(course);
         System.out.println("Course " + course.getCourseName() + " (" + course.getCourseId() + ") has been assigned to teacher "
-                + teacher.getTeacherName() + " (" + teacher.getTeacherId() + ")\n");
+                + teacher.getTeacherName() + "(" + teacher.getTeacherId() + ")");
     }
 
     // Method to find a teacher by ID in the list of teachers
