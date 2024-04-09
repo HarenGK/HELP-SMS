@@ -1,9 +1,9 @@
 package DIP215_ASG.src;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 import java.util.Scanner;
 
 
@@ -464,12 +464,6 @@ public class Main {
 
         teacher.dropCourse(course);
         System.out.println("Course " + courseId + " dropped for teacher " + teacherId + ".");
-    }
-
-
-    // Method to check if a teacher with the given ID already exists
-    private static boolean teacherExists(String teacherId) {
-        return teachers.stream().anyMatch(teacher -> teacher.getTeacherId().equals(teacherId));
     }
 
     private static void recordAttendance() {
