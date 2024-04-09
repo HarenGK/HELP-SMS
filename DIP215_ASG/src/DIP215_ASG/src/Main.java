@@ -358,61 +358,77 @@ public class Main {
         System.out.println("Enter the teacher's ID: ");
         String teacherId = scanner.nextLine();
 
-        if (teacherExists(teacherId)) {
-            System.out.println("A teacher with this ID already exists. Try again.");
-            return; // Exit the method if the teacher ID already exists
+        // Check if the teacher already exists
+        Teacher teacher = findTeacherById(teacherId);
+        if (teacher == null) {
+            // If the teacher doesn't exist, create a new one
+            System.out.println("Teacher not found. Creating a new teacher profile.");
+
+            System.out.println("Enter teacher's name: ");
+            String teacherName = scanner.nextLine(); // Use nextLine() to capture full name input
+
+            System.out.println("Enter teacher's qualifications: ");
+            String qualifications = scanner.nextLine(); // Use nextLine() to capture full qualifications input
+
+            System.out.println("Enter teacher's work email: ");
+            String email = scanner.nextLine(); // Use nextLine() to capture full email input
+
+            System.out.println("Enter teacher's contact number: ");
+            while (!scanner.hasNextInt()) { // Check if the next input is an integer
+                System.out.println("Please enter a valid contact number (digits only):");
+                scanner.next(); // Discard the non-integer input
+            }
+            int contactNo = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline left-over
+
+            // Create a new teacher object
+            teacher = new Teacher(teacherId, teacherName, email, contactNo, qualifications);
+            teachers.add(teacher); // Add the new teacher to the list of teachers
         }
-        // Find or create the teacher
-// Find or create the teacher
-        Teacher teacher = teachers.stream() // Stream of teachers
-                .filter(t -> t.getTeacherId().equals(teacherId))
-                .findFirst()
-                .orElseGet(() -> {
-                    System.out.println("Enter teacher's name: ");
-                    String teacherName = scanner.nextLine(); // Use nextLine() to capture full name input
 
-                    System.out.println("Enter teacher's qualifications: ");
-                    String qualifications = scanner.nextLine(); // Use nextLine() to capture full qualifications input
-
-                    System.out.println("Enter teacher's work email: ");
-                    String email = scanner.nextLine(); // Use nextLine() to capture full email input
-
-                    System.out.println("Enter teacher's contact number: ");
-                    while (!scanner.hasNextInt()) { // Check if the next input is an integer
-                        System.out.println("Please enter a valid contact number (digits only):");
-                        scanner.next(); // Discard the non-integer input
-                    }
-                    int contactNo = scanner.nextInt();
-                    //scanner.nextLine(); // Consume the rest of the line after reading the integer
-
-                    Teacher newTeacher = new Teacher(teacherId, teacherName, email, contactNo, qualifications);
-                    teachers.add(newTeacher);
-                    return newTeacher;
-                });
-
-        scanner.nextLine (); // Consume the newline left-over
+        // Prompt the user to enter course details
         System.out.println("Enter the course ID to assign: ");
-        String courseId = scanner.next();
-        // Find or create the course
-        Course course = courses.stream()
-                .filter(c -> c.getCourseId().equals(courseId))
-                .findFirst()
-                .orElseGet(() -> {
-                    scanner.nextLine();
-                    System.out.println("Enter course name: ");
-                    String courseName = scanner.nextLine();
-                    System.out.println("Enter credit hours: ");
-                    double creditHours = scanner.nextDouble ();
-                    Course newCourse = new Course(courseId, courseName, creditHours);
-                    courses.add(newCourse);
-                    return newCourse;
-                });
+        String courseId = scanner.nextLine();
 
+        // Check if the course already exists
+        Course course = findCourseById3(courseId);
+        if (course == null) {
+            // If the course doesn't exist, create a new one
+            System.out.println("Course not found. Creating a new course.");
+
+            System.out.println("Enter course name: ");
+            String courseName = scanner.nextLine();
+
+            System.out.println("Enter credit hours: ");
+            double creditHours = scanner.nextDouble();
+            scanner.nextLine(); // Consume the newline left-over
+
+            // Create a new course object
+            course = new Course(courseId, courseName, creditHours);
+            courses.add(course); // Add the new course to the list of courses
+        }
+
+        // Assign the course to the teacher
         teacher.addCourse(course);
-        System.out.println(
-                "Course " + course.getCourseName() + " (" + course.getCourseId () + ") has been assigned to teacher " + teacher.getTeacherName() + "(" + teacher.getTeacherId () + ")");
+        System.out.println("Course " + course.getCourseName() + " (" + course.getCourseId() + ") has been assigned to teacher "
+                + teacher.getTeacherName() + "(" + teacher.getTeacherId() + ")");
     }
 
+    // Method to find a teacher by ID in the list of teachers
+    private static Teacher findTeacherById(String teacherId) {
+        return teachers.stream()
+                .filter(teacher -> teacher.getTeacherId().equals(teacherId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    // Method to find a course by ID in the list of courses
+    private static Course findCourseById3(String courseId) {
+        return courses.stream()
+                .filter(course -> course.getCourseId().equals(courseId))
+                .findFirst()
+                .orElse(null);
+    }
     //Method to drop assigned course for teacher
     private static void dropCourseForTeacher() {
         System.out.println("Enter the teacher's ID: ");
