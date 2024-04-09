@@ -148,6 +148,6 @@ public class Course {
                 "\nCredit Hours: " + creditHours +
                 "\nCourse Date: " + scheduleDate +
                 "\nCourse Time: " + scheduleTime +
-                "\nCourse Duration: " + scheduleDuration + "\n";
+                "\nCourse Duration: " + scheduleDuration + " hours" +"\n";
     }
 }
