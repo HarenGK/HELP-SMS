@@ -12,7 +12,7 @@ public class Course {
     private double creditHours;
     private String scheduleDate;
     private String scheduleTime;
-    private String scheduleDuration;
+    private int scheduleDuration;
     private List<Student> enrolledStudents = new ArrayList<>();
     public List<Student> getStudentsEnrolled() {
         return new ArrayList<>(enrolledStudents);
@@ -21,7 +21,7 @@ public class Course {
     private Map<Student, Double> grades = new HashMap<>();
 
     // Constructor and methods providing controlled access to private variables
-    public Course(String courseId, String courseName, double creditHours, String scheduleDate, String scheduleTime, String scheduleDuration) {
+    public Course(String courseId, String courseName, double creditHours, String scheduleDate, String scheduleTime, int scheduleDuration) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.creditHours = creditHours;
@@ -73,11 +73,11 @@ public class Course {
         this.scheduleTime = scheduleTime;
     }
 
-    public String getScheduleDuration() {
+    public int getScheduleDuration() {
         return scheduleDuration;
     }
 
-    public void setScheduleDuration(String scheduleDuration) {
+    public void setScheduleDuration(int scheduleDuration) {
         this.scheduleDuration = scheduleDuration;
     }
 
