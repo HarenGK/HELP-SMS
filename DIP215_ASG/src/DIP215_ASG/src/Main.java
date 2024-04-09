@@ -321,10 +321,15 @@ public class Main {
             }
 
             // Enroll the student in the course
+
+            //Add the assigned course into the student array list
             student.enrollCourse(course);
+            //Add the enrolled student into the course array list
+            course.enrollStudent(student);
             System.out.println("Student " + studentId + " enrolled in " + courseId   +  " course.");
         }
     }
+
 
     private static void dropCourseForStudent() {
         System.out.print("\nDrop Course for Student\n");
