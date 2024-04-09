@@ -14,12 +14,14 @@ public class Teacher {
 
     // Constructor
     public Teacher(String teacherId, String teacherName, String teacherEmail, int teacherContactNo, String teacherQualifications) {
+        // Initialize teacher with ID, name, email, contact number, and qualifications
         this.teacherId = teacherId;
         this.teacherName = teacherName;
         this.teacherEmail = teacherEmail;
         this.teacherContactNo = teacherContactNo;
         this.teacherQualifications = teacherQualifications;
-        this.coursesTaught = new ArrayList<>(); // Initialize the ArrayList of courses taught
+        // Set up an empty list for courses that the teacher will teach
+        this.coursesTaught = new ArrayList<>();
     }
 
     public void addCourse(Course course) {
@@ -32,6 +34,7 @@ public class Teacher {
     }
 
     public void printTeacherInfo() {
+        // Display the teacher's basic information
         System.out.println("Teacher ID: " + teacherId);
         System.out.println("Teacher Name: " + teacherName);
         System.out.println("Teacher Email: " + teacherEmail);
@@ -71,14 +74,6 @@ public class Teacher {
 
     public String getTeacherEmail() {
         return teacherEmail;
-    }
-
-    public void setTeacherEmail(String teacherEmail) {
-        if (teacherEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$")) { // Simple regex for email validation
-            this.teacherEmail = teacherEmail;
-        } else {
-            System.out.println("Invalid email format.");
-        }
     }
 
     public int getTeacherContactNo() {

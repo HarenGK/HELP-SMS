@@ -368,15 +368,21 @@ public class Main {
         if (teacher == null) {
             // If the teacher doesn't exist, create a new one
             System.out.println("Teacher not found. Creating a new teacher profile.");
-
             System.out.println("Enter teacher's name: ");
             String teacherName = scanner.nextLine(); // Use nextLine() to capture full name input
 
             System.out.println("Enter teacher's qualifications: ");
             String qualifications = scanner.nextLine(); // Use nextLine() to capture full qualifications input
 
-            System.out.println("Enter teacher's work email: ");
-            String email = scanner.nextLine(); // Use nextLine() to capture full email input
+            String email;
+            do {
+                System.out.println("Enter teacher's work email: ");
+                email = scanner.nextLine();
+                if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+                    System.out.println("Invalid email format. Please try again.");
+                }
+            } while (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$"));
+
 
             System.out.println("Enter teacher's contact number: ");
             while (!scanner.hasNextInt()) { // Check if the next input is an integer
