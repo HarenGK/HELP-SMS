@@ -102,7 +102,7 @@ public class Course {
     public void displayAttendanceRecords() {
         System.out.println("Attendance Records:");
         attendanceRecords.forEach((student, attendanceList) -> {
-            System.out.format("%-30s - %-5s", "Student ID: " + student.getStudentId(), student.getStudentName());
+            System.out.format("%-20s - %-30s", "Student ID: " + student.getStudentId(), student.getStudentName());
 
             for (Boolean present : attendanceList) {
                 System.out.format("%-10s%n", (present ? "Present" : "Absent"));
