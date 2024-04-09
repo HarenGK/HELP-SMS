@@ -39,7 +39,7 @@ public class Teacher {
         System.out.println("Qualifications: " + teacherQualifications);
         System.out.println("Courses Assigned:");
         for (Course course : this.coursesTaught) { // Loop through the courses taught by the teacher and print the course name and number of students enrolled using getStudentsEnrolled() in the Course class
-            List<Student> enrolledStudents = course.getEnrolledStudents();
+            List<Student> enrolledStudents = course.getStudentsEnrolled();
             System.out.println("- " + course.getCourseName() + ": " + enrolledStudents.size() + " students enrolled");
         }
     }
