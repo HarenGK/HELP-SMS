@@ -4,6 +4,7 @@ public class PartTimeStudent extends Student {
     private static final int PartTimeMaxCredits = 8; // Assume part-time students can enroll in a maximum of 8 credits
     private boolean employmentStatus;
 
+    // Constructor
     public PartTimeStudent(String studentID, String studentName, int creditHours, boolean employmentStatus) {
         // Constructor that takes in some attributes from the superclass and some from the subclass demonstrating inheritance
         super(studentID, studentName, "Part Time", Math.min(creditHours, PartTimeMaxCredits));
