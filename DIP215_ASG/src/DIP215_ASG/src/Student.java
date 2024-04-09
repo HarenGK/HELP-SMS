@@ -90,19 +90,47 @@ public class Student {
     }
 
     // Method to generate a transcript for a student
+// Helper method to convert grade to grade point
+    private static double getGradePoint(double grade) {
+        if (grade >= 85) return 4.00;
+        else if (grade >= 80) return 3.75;
+        else if (grade >= 75) return 3.50;
+        else if (grade >= 70) return 3.25;
+        else if (grade >= 65) return 3.00;
+        else if (grade >= 60) return 2.75;
+        else if (grade >= 55) return 2.50;
+        else if (grade >= 50) return 2.00;
+        else return 0.00;
+    }
+
+    // Modified generateTranscript method to calculate and include CGPA
     public String generateTranscript() {
         StringBuilder transcript = new StringBuilder();
         transcript.append("Transcript for: ").append(getStudentName())
                 .append(" (ID: ").append(getStudentId()).append(")\n")
                 .append("------------------------------------------------------\n");
+
+        double totalGradePoints = 0;
+        int courseCount = 0;
+
         for (Course course : getCoursesEnrolled()) {
             Double grade = getGrade(course);
+            double gradePoint = grade != null ? getGradePoint(grade) : 0;
+            totalGradePoints += gradePoint;
+            courseCount++;
+
             transcript.append(course.getCourseName())
                     .append(": Grade: ")
                     .append(grade != null ? grade : "N/A")
+                    .append(" - Grade Point: ")
+                    .append(gradePoint)
                     .append("\n");
         }
-        transcript.append("------------------------------------------------------\n");
+
+        double cgpa = courseCount > 0 ? totalGradePoints / courseCount : 0.00;
+        transcript.append("------------------------------------------------------\n")
+                .append("CGPA: ").append(String.format("%.2f", cgpa)).append("\n");
+
         return transcript.toString();
     }
 
