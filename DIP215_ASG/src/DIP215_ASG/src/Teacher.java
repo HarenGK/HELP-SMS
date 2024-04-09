@@ -102,7 +102,6 @@ public class Teacher {
         }
     }
 
-
     // Overriding the toString() method
     @Override
     public String toString() {

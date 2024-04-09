@@ -1,5 +1,4 @@
 package DIP215_ASG.src;
-
 public class PartTimeStudent extends Student {
     private static final int PartTimeMaxCredits = 8; // Assume part-time students can enroll in a maximum of 8 credits
     private boolean employmentStatus;
