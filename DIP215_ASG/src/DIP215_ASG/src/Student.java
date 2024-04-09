@@ -10,14 +10,14 @@ public class Student {
     private String studentName;
     private String studentType;
     private int totalCreditHours;
-    private List<Course> coursesEnrolled;
+    private List<Course> coursesEnrolled; // List to keep track of courses enrolled
 
-    public List<Course> getCoursesEnrolled() {
+    public List<Course> getCoursesEnrolled() { // Getter method for coursesEnrolled
         return new ArrayList<>(coursesEnrolled);
     }
-    private Map<Course, Double> courseGrades; // Map to keep track of grades for courses
+    private Map<Course, Double> courseGrades; // Map to keep track of grades for courses in pair (Course, Grade)
 
-    public Student(String studentID, String studentName, String studentType, int totalCreditHours) {
+    public Student(String studentID, String studentName, String studentType, int totalCreditHours) { // Constructor
         this.studentID = studentID;
         this.studentName = studentName;
         this.studentType = studentType;
@@ -26,10 +26,10 @@ public class Student {
         this.courseGrades = new HashMap<>(); // Initialize the grades map where vales are stored in pairs such as (Course, Grade)
     }
 
+    // Getters and Setters for the Student class
     public String getStudentId() {
         return studentID;
     }
-
     public void setStudentId(String studentID) {
         this.studentID = studentID;
     }
@@ -58,12 +58,14 @@ public class Student {
         this.totalCreditHours = totalCreditHours;
     }
 
+    // Method to enroll in a course
     public void enrollCourse(Course course) {
         coursesEnrolled.add(course);
         totalCreditHours += course.getCreditHours(); // Update credit hours when enrolling in a course
         courseGrades.put(course, null); // Initialize the grade for this course as null
     }
 
+    // Method to drop a course
     public void dropCourse(Course course) {
         if (coursesEnrolled.remove(course)) {
             totalCreditHours -= course.getCreditHours(); // Update credit hours when dropping a course
@@ -75,7 +77,7 @@ public class Student {
         }
     }
 
-
+    // Method to set the grade for a course
     public void setGrade(Course course, double grade) {
         if(coursesEnrolled.contains(course)) {
             courseGrades.put(course, grade); // Set the grade for the course
@@ -84,6 +86,7 @@ public class Student {
         }
     }
 
+    // Method to get the grade for a course
     public Double getGrade(Course course) {
         return courseGrades.get(course); // Gets the grade for the course
     }
@@ -102,7 +105,7 @@ public class Student {
         else return 0.00;
     }
 
-    // Modified generateTranscript method to calculate and include CGPA
+    // generateTranscript method to calculate and include CGPA
     public String generateTranscript() {
         StringBuilder transcript = new StringBuilder();
         transcript.append("Transcript for: ").append(getStudentName())
@@ -133,6 +136,7 @@ public class Student {
         return transcript.toString();
     }
 
+    // Override the equals method to compare two Student objects based on studentID
     @Override // toString method to display student details that is overridden in subclasses (PartTimeStudent & FullTimeStudent)
     public String toString() {
         return "\nStudent ID: " + studentID +

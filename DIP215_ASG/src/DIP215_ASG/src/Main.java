@@ -90,6 +90,7 @@ public class Main {
         }
     }
 
+    // Method to display the menu and get the user's choice
     private static int getMenuChoice() {
         while (true) {
             System.out.println("\nPlease choose an option:");
@@ -125,6 +126,7 @@ public class Main {
             scanner.nextLine(); // It's important to clear the newline character in the case of invalid input
         }
     }
+    //Method to ask how many students the user wants to enroll and enroll them one by one
     private static void enrollStudents() {
         System.out.print("How many students would you like to enroll? ");
         int studentCount = getValidIntegerInput1();
@@ -135,13 +137,14 @@ public class Main {
             System.out.println("Entering information for student number " + (i + 1) + ":");
             enrollSingleStudent();
 
-            // Optionally add a pause or confirmation before continuing
+            // Adds a pause or confirmation before continuing
             if (i < studentCount - 1) {
                 System.out.println("Press Enter to continue to the next student...");
                 scanner.nextLine();
             }
         }
     }
+    // Method to enroll student one  by one
     private static void enrollSingleStudent() {
         System.out.print("Enter student ID: ");
         String studentId = scanner.nextLine();
@@ -170,6 +173,7 @@ public class Main {
         System.out.println("\nStudent, " + studentName + " (" + studentId + ") has been registered.");
     }
 
+    // Method to get a yes or no input from the user
     private static boolean getYesOrNoInput(String question) {
         String input;
         do {
@@ -183,6 +187,7 @@ public class Main {
         } while(true);
     }
 
+    // Method to get a non-empty line of text from the user
     private static String getNonEmptyLine(String prompt) {
         String input;
         do {
@@ -195,7 +200,7 @@ public class Main {
         return input;
     }
 
-
+    // Method to get a valid integer input from the user
     private static int getValidIntegerInput1() {
         while (!scanner.hasNextInt()) {
             System.out.println("That's not a valid number. Please enter a valid integer:");
@@ -206,11 +211,12 @@ public class Main {
         return number;
     }
 
-
+    // Method to check if a student with the given ID already exists
     private static boolean studentExists(String studentId) {
         return students.stream().anyMatch(student -> student.getStudentId().equals(studentId));
     }
 
+    // Method to get a valid double input from the user
     private static double getValidDoubleInput() {
         while (!scanner.hasNextDouble()) {
             System.out.println("Please enter a valid number:");
@@ -221,6 +227,7 @@ public class Main {
         return value;
     }
 
+    // Method to ask how many new courses the user wants to enter
     private static void addNewCourses() {
         System.out.print("How many new courses would you like to enter? ");
         int courseCount = getValidIntegerInput(); // Ensure that the user inputs a valid integer
@@ -235,7 +242,7 @@ public class Main {
             }
         }
     }
-
+    // Method to add a new course to the list of courses
     private static void addNewCourse() {
         // Input validation for new course ID
         String courseId;
@@ -265,12 +272,42 @@ public class Main {
             }
         }
 
+        // Input validation for new course date
+        String courseDate;
+        boolean isValidDate = false;
+        do {
+            System.out.print("Enter " + courseId + " course date (Monday/Tuesday/Wednesday/Thursday/Friday): ");
+            courseDate = scanner.next();
+            // Perform input validation using switch statement
+            switch (courseDate.toLowerCase()) {
+                case "monday":
+                case "tuesday":
+                case "wednesday":
+                case "thursday":
+                case "friday":
+                    isValidDate = true;
+                    break;
+                default:
+                    System.out.println("Invalid input! Please enter a valid day (Monday/Tuesday/Wednesday/Thursday/Friday).");
+                    break;
+            }
+        } while (!isValidDate);
+
+        // Input validation for new course time
+        System.out.print("Enter " + courseId + " course time: ");
+        String courseTime = scanner.nextLine();
+
+        // Input validation for new course duration
+        System.out.print("Enter " + courseId + " course duration: ");
+        int courseDuration = scanner.nextInt ();
+
         // Create and add the new course if input validation passes
-        Course course = new Course(courseId, courseName, creditHours);
+        Course course = new Course(courseId, courseName, creditHours, courseDate, courseTime, courseDuration);
         courses.add(course);
         System.out.println(courseName + " (" + courseId + ") added successfully to course list");
     }
 
+    // Method to get a valid integer input from the user
     private static int getValidIntegerInput() {
         while (!scanner.hasNextInt()) {
             System.out.println("That's not a valid number. Please enter a valid integer:");
@@ -281,6 +318,8 @@ public class Main {
         return number;
     }
 
+
+    // Method to print all courses
     private static void printAllCourses() {
         System.out.println ("\nDisplaying all available courses...\n");
         System.out.println("\nAll Courses:");
@@ -289,11 +328,12 @@ public class Main {
         }
     }
 
-
+    // Method to check if a course with the given ID already exists
     private static boolean courseExists(String courseId) {
         return courses.stream().anyMatch(course -> course.getCourseId().equals(courseId));
     }
 
+    // Method to assign a course to a student
     private static void assignCourseToStudent() {
         System.out.print("Course ID: ");
         String courseId = scanner.nextLine();
@@ -320,8 +360,6 @@ public class Main {
                 continue; // Continue to the next iteration if student not found
             }
 
-            // Enroll the student in the course
-
             //Add the assigned course into the student array list
             student.enrollCourse(course);
             //Add the enrolled student into the course array list
@@ -331,6 +369,7 @@ public class Main {
     }
 
 
+    // Method to drop a course for a student
     private static void dropCourseForStudent() {
         System.out.print("\nDrop Course for Student\n");
         System.out.print("Enter Course ID: ");
@@ -359,6 +398,7 @@ public class Main {
     }
 
 
+    // Method to assign a course to a teacher
     private static void assignCourseToTeacher() {
         System.out.println("Enter the teacher's ID: ");
         String teacherId = scanner.nextLine();
@@ -412,17 +452,47 @@ public class Main {
 
             System.out.println("Enter credit hours: ");
             double creditHours = scanner.nextDouble();
+
+            // Input validation for new course date
+            String courseDate;
+            boolean isValidDate = false;
+            do {
+                System.out.print("Enter " + courseId + " course date (Monday/Tuesday/Wednesday/Thursday/Friday): ");
+                courseDate = scanner.next();
+                // Perform input validation using switch statement
+                switch (courseDate.toLowerCase()) {
+                    case "monday":
+                    case "tuesday":
+                    case "wednesday":
+                    case "thursday":
+                    case "friday":
+                        isValidDate = true;
+                        break;
+                    default:
+                        System.out.println("Invalid input! Please enter a valid weekday (Monday/Tuesday/Wednesday/Thursday/Friday).");
+                        break;
+                }
+            } while (!isValidDate);
+
+            // Input for new course time
+            System.out.print("Enter " + courseId + " course time: ");
+            String courseTime = scanner.next();
+
+            // Input for new course duration
+            System.out.print("Enter " + courseId + " course duration: ");
+            int courseDuration = scanner.nextInt ();
+
             scanner.nextLine(); // Consume the newline left-over
 
             // Create a new course object
-            course = new Course(courseId, courseName, creditHours);
+            course = new Course(courseId, courseName, creditHours, courseDate, courseTime, courseDuration);
             courses.add(course); // Add the new course to the list of courses
         }
 
         // Assign the course to the teacher
         teacher.addCourse(course);
         System.out.println("Course " + course.getCourseName() + " (" + course.getCourseId() + ") has been assigned to teacher "
-                + teacher.getTeacherName() + " (" + teacher.getTeacherId() + ")");
+                + teacher.getTeacherName() + "(" + teacher.getTeacherId() + ")");
     }
 
     // Method to find a teacher by ID in the list of teachers
@@ -472,6 +542,7 @@ public class Main {
         System.out.println("Course " + courseId + " dropped for teacher " + teacherId + ".");
     }
 
+    // Method to record attendance for a student in a course
     private static void recordAttendance() {
         System.out.println("\nStudent's Attendance Recording System Initialized...");
         // Assuming you have a method to select a course and student
@@ -499,6 +570,7 @@ public class Main {
 
     }
 
+    // Method to enter grades for a student in a course
     private static void enterGrades() {System.out.println("Student's Grades Recording System Initialized...\n");
         System.out.println("Enter course ID for grade entry:");
         String courseId = scanner.nextLine();
@@ -517,6 +589,8 @@ public class Main {
             System.out.println("Course or student not found.");
         }
     }
+
+    // Method to find a course by ID in the list of courses
     private static Course findCourseById2(String courseId) {
         String sanitizedCourseId = courseId.replaceAll("\\s+", ""); // Remove all spaces
         return courses.stream()
@@ -525,9 +599,10 @@ public class Main {
                 .orElse(null); // Return null if course not found
     }
 
+    // Method to print grade reports for all students
     private static void printGradesReport() {
         System.out.println("\nGenerating Student Grade Reports...\n");
-        System.out.println ("\nStudent Grade Report:");
+        System.out.println ("Student Grade Report:");
         for (Student student : students) {
             System.out.println(student);
             for (Course course : student.getCoursesEnrolled()) {
@@ -538,6 +613,7 @@ public class Main {
         }
     }
 
+    // Method to print attendance report
     private static void printAttendanceReport() {
         System.out.println ("\nGenerating Attendance Report...\n");
         System.out.println("\nAttendance Report:");
@@ -548,6 +624,7 @@ public class Main {
         }
     }
 
+    // Method to print class report for teachers
     private static void printTeacherAssignmentsReport() {
         System.out.println("\nGenerating Teacher Assignments Report...\n");
         System.out.println("\nTeacher Assignments Report:");
