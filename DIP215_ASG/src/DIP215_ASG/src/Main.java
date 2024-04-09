@@ -129,7 +129,7 @@ public class Main {
     //Method to ask how many students the user wants to enroll and enroll them one by one
     private static void enrollStudents() {
         System.out.print("How many students would you like to enroll? ");
-        int studentCount = getValidIntegerInput1();
+        int studentCount = getValidIntegerInput();
 
         //scanner.nextLine(); // Clear buffer after number input
 
@@ -198,17 +198,6 @@ public class Main {
             }
         } while (input.isEmpty());
         return input;
-    }
-
-    // Method to get a valid integer input from the user
-    private static int getValidIntegerInput1() {
-        while (!scanner.hasNextInt()) {
-            System.out.println("That's not a valid number. Please enter a valid integer:");
-            scanner.next(); // Consume the invalid input
-        }
-        int number = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline left-over
-        return number;
     }
 
     // Method to check if a student with the given ID already exists
@@ -299,7 +288,7 @@ public class Main {
 
         // Input validation for new course duration
         System.out.print("Enter " + courseId + " course duration: ");
-        int courseDuration = scanner.nextInt ();
+        int courseDuration = getValidIntegerInput();
 
         // Create and add the new course if input validation passes
         Course course = new Course(courseId, courseName, creditHours, courseDate, courseTime, courseDuration);
@@ -480,7 +469,7 @@ public class Main {
 
             // Input for new course duration
             System.out.print("Enter " + courseId + " course duration: ");
-            int courseDuration = scanner.nextInt ();
+            int courseDuration = getValidIntegerInput();
 
             scanner.nextLine(); // Consume the newline left-over
 
