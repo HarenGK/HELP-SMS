@@ -130,10 +130,6 @@ public class Course {
         grades.forEach((student, grade) -> System.out.println(student.getStudentName() + ": " + grade));
     }
 
-    //Method to get students enrolled in the course
-    public List<Student> getEnrolledStudents() {
-        return new ArrayList<>(enrolledStudents);
-    }
 
 
     @Override
