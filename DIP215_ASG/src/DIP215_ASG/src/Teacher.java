@@ -24,6 +24,7 @@ public class Teacher {
         this.coursesTaught = new ArrayList<>();
     }
 
+    // Method to add a course to the teacher
     public void addCourse(Course course) {
         // Check if the course is already taught by the teacher
         if (this.coursesTaught.stream().noneMatch(c -> c.getCourseId().equals(course.getCourseId()))) {
