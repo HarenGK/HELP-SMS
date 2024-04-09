@@ -38,9 +38,8 @@ public class Teacher {
         System.out.println("Teacher Contact Number: " + teacherContactNo);
         System.out.println("Qualifications: " + teacherQualifications);
         System.out.println("Courses Assigned:");
-        for (Course course : this.coursesTaught) {
-            // If you already have a method getStudentsEnrolled() in the Course class:
-            List<Student> enrolledStudents = course.getStudentsEnrolled();
+        for (Course course : this.coursesTaught) { // Loop through the courses taught by the teacher and print the course name and number of students enrolled using getStudentsEnrolled() in the Course class
+            List<Student> enrolledStudents = course.getEnrolledStudents();
             System.out.println("- " + course.getCourseName() + ": " + enrolledStudents.size() + " students enrolled");
         }
     }
@@ -98,6 +97,16 @@ public class Teacher {
         this.coursesTaught = new ArrayList<>(coursesTaught);
     }
 
+    // Method to remove an assigned course to the teacher
+    public void dropCourse(Course course) {
+        if (this.coursesTaught.remove(course)) {
+            System.out.println("Course removed successfully.");
+        } else {
+            System.out.println("Course not found.");
+        }
+    }
+
+
     // Overriding the toString() method
     @Override
     public String toString() {
@@ -107,4 +116,6 @@ public class Teacher {
                 "\nTeacher Contact Number: " + teacherContactNo +
                 "\nQualifications: " + teacherQualifications;
     }
+
+
 }

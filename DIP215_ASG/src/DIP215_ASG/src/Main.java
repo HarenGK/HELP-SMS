@@ -47,30 +47,38 @@ public class Main {
                     break;
 
                 case 7:
-                    recordAttendance();
+                    dropCourseForTeacher();
                     break;
 
                 case 8:
-                    enterGrades();
+                    recordAttendance();
                     break;
 
                 case 9:
-                    printGradesReport();
+                    enterGrades();
                     break;
 
                 case 10:
-                    printAttendanceReport();
+                    printGradesReport();
                     break;
 
                 case 11:
-                    printTeacherAssignmentsReport();
+                    printAttendanceReport();
                     break;
 
                 case 12:
-                    printAllGradeReports();
+                    printTeacherAssignmentsReport();
                     break;
 
                 case 13:
+                    printAllGradeReports();
+                    break;
+
+                case 14:
+                    printTeacherInfo();
+                    break;
+
+                case 15:
                     System.out.println("Exiting HELP School Management System. \nThank You!");
                     scanner.close();
                     return;
@@ -91,22 +99,24 @@ public class Main {
             System.out.println("4. Drop course for students");
             System.out.println("5. Display all courses");
             System.out.println("6. Assign a course to a teacher");
-            System.out.println("7. Record student attendance");
-            System.out.println("8. Enter grades for a student");
-            System.out.println("9. Print grades report");
-            System.out.println("10. Print attendance report");
-            System.out.println("11. Print teacher assignments report");
-            System.out.println("12. Print all grade reports");
-            System.out.println("13. Exit");
+            System.out.println("7. Remove a course from a teacher");
+            System.out.println("8. Record student attendance");
+            System.out.println("9. Enter grades for a student");
+            System.out.println("10. Print grades report");
+            System.out.println("11. Print attendance report");
+            System.out.println("12. Print teacher assignments report");
+            System.out.println("13. Print all grade reports");
+            System.out.println("14. Print Teacher Information");
+            System.out.println("15. Exit");
             System.out.print("Enter choice: ");
 
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume the newline left-over
-                if (choice >= 1 && choice <= 13) { // Updated to include all menu options
+                if (choice >= 1 && choice <= 15) { // Updated to include all menu options
                     return choice;
                 } else {
-                    System.out.println("Invalid choice. Please enter a number between 1 and 13."); // Updated message
+                    System.out.println("Invalid choice. Please enter a number between 1 and 15."); // Updated message
                 }
             } else {
                 System.out.println("Invalid input. Please enter a number.");
@@ -354,7 +364,7 @@ public class Main {
         }
         // Find or create the teacher
 // Find or create the teacher
-        Teacher teacher = teachers.stream()
+        Teacher teacher = teachers.stream() // Stream of teachers
                 .filter(t -> t.getTeacherId().equals(teacherId))
                 .findFirst()
                 .orElseGet(() -> {
@@ -403,6 +413,40 @@ public class Main {
                 "Course " + course.getCourseName() + " (" + course.getCourseId () + ") has been assigned to teacher " + teacher.getTeacherName() + "(" + teacher.getTeacherId () + ")");
     }
 
+    //Method to drop assigned course for teacher
+    private static void dropCourseForTeacher() {
+        System.out.println("Enter the teacher's ID: ");
+        String teacherId = scanner.nextLine();
+
+        Teacher teacher = teachers.stream()
+                .filter(t -> t.getTeacherId().equals(teacherId))
+                .findFirst()
+                .orElse(null);
+
+        if (teacher == null) {
+            System.out.println("Teacher not found.");
+            return;
+        }
+
+        System.out.println("Enter the course ID to drop: ");
+        String courseId = scanner.nextLine();
+
+        Course course = courses.stream()
+                .filter(c -> c.getCourseId().equals(courseId))
+                .findFirst()
+                .orElse(null);
+
+        if (course == null) {
+            System.out.println("Course not found.");
+            return;
+        }
+
+        teacher.dropCourse(course);
+        System.out.println("Course " + courseId + " dropped for teacher " + teacherId + ".");
+    }
+
+
+    // Method to check if a teacher with the given ID already exists
     private static boolean teacherExists(String teacherId) {
         return teachers.stream().anyMatch(teacher -> teacher.getTeacherId().equals(teacherId));
     }
@@ -494,6 +538,23 @@ public class Main {
         System.out.println("Grade Reports of all Students:");
         for (Student student : students) {
             System.out.println(student.generateTranscript());
+        }
+    }
+
+    // Method to print teacher information
+    private static void printTeacherInfo() {
+        System.out.println("Enter the teacher's ID: ");
+        String teacherId = scanner.nextLine();
+
+        Teacher teacher = teachers.stream()
+                .filter(t -> t.getTeacherId().equals(teacherId))
+                .findFirst()
+                .orElse(null);
+
+        if (teacher != null) {
+            teacher.printTeacherInfo();
+        } else {
+            System.out.println("Teacher not found.");
         }
     }
 
