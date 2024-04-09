@@ -299,7 +299,7 @@ public class Main {
 
         // Input validation for new course duration
         System.out.print("Enter " + courseId + " course duration: ");
-        String courseDuration = scanner.nextLine();
+        int courseDuration = scanner.nextInt ();
 
         // Create and add the new course if input validation passes
         Course course = new Course(courseId, courseName, creditHours, courseDate, courseTime, courseDuration);
@@ -474,7 +474,7 @@ public class Main {
 
             // Input for new course duration
             System.out.print("Enter " + courseId + " course duration: ");
-            String courseDuration = scanner.next();
+            int courseDuration = scanner.nextInt ();
 
             scanner.nextLine(); // Consume the newline left-over
 
