@@ -1,5 +1,4 @@
 package DIP215_ASG.src;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -90,7 +89,7 @@ public class Student {
     }
 
     // Method to generate a transcript for a student
-// Helper method to convert grade to grade point
+    // Helper method to convert grade to grade point
     private static double getGradePoint(double grade) {
         if (grade >= 85) return 4.00;
         else if (grade >= 80) return 3.75;
@@ -133,7 +132,6 @@ public class Student {
 
         return transcript.toString();
     }
-
 
     @Override // toString method to display student details that is overridden in subclasses (PartTimeStudent & FullTimeStudent)
     public String toString() {
