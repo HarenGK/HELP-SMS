@@ -107,7 +107,7 @@ public class Student {
     }
 
 
-    @Override
+    @Override // toString method to display student details that is overridden in subclasses (PartTimeStudent & FullTimeStudent)
     public String toString() {
         return "\nStudent ID: " + studentID +
                 "\nStudent Name: " + studentName +

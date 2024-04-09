@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Course {
+    // Instance variables that are set as private to ensure data encapsulation
     private String courseId;
     private String courseName;
     private double creditHours;
@@ -17,6 +18,7 @@ public class Course {
     private Map<Student, List<Boolean>> attendanceRecords; // Maps each student to their attendance record
     private Map<Student, Double> grades = new HashMap<>();
 
+    // Constructor and methods providing controlled access to private variables
     public Course(String courseId, String courseName, double creditHours) {
         this.courseId = courseId;
         this.courseName = courseName;
@@ -26,6 +28,7 @@ public class Course {
         this.grades = new HashMap<>(); // Initialize the grades map
     }
 
+    // Getters and Setters to access private variables through public methods demonstrating encapsulation
     public String getCourseId() {
         return courseId;
     }
