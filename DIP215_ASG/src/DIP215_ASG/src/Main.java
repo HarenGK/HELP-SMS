@@ -479,13 +479,19 @@ public class Main {
         Student student = findStudentById(studentId);
 
         if (course != null && student != null) {
-            System.out.println("Mark student as present? (yes/no):");
-            boolean isPresent = scanner.next().equalsIgnoreCase("yes");
-            course.recordAttendance(student, isPresent);
-            System.out.println("Attendance of " + studentId + " recorded.");
+            // Check if the student is enrolled in the course
+            if (student.getCoursesEnrolled().contains(course)) {
+                System.out.println("Mark student as present? (yes/no):");
+                boolean isPresent = scanner.next().equalsIgnoreCase("yes");
+                course.recordAttendance(student, isPresent);
+                System.out.println("Attendance of " + studentId + " recorded.");
+            } else {
+                System.out.println("Student " + studentId + " is not enrolled in the course.");
+            }
         } else {
             System.out.println("Course or student not found.");
         }
+
     }
 
     private static void enterGrades() {System.out.println("Student's Grades Recording System Initialized...\n");
