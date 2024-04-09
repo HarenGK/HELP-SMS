@@ -416,7 +416,7 @@ public class Main {
         // Assign the course to the teacher
         teacher.addCourse(course);
         System.out.println("Course " + course.getCourseName() + " (" + course.getCourseId() + ") has been assigned to teacher "
-                + teacher.getTeacherName() + "(" + teacher.getTeacherId() + ")");
+                + teacher.getTeacherName() + " (" + teacher.getTeacherId() + ")");
     }
 
     // Method to find a teacher by ID in the list of teachers

@@ -11,8 +11,8 @@ public class Course {
     private String courseName;
     private double creditHours;
     private List<String> courseSchedule; // Use List for type flexibility
-    private List<Student> enrolledStudents = new ArrayList<>();
-    public List<Student> getStudentsEnrolled() {
+    private List<Student> enrolledStudents = new ArrayList<>(); // List of students enrolled in the course
+    public List<Student> getStudentsEnrolled() { // Getter method for enrolledStudents
         return new ArrayList<>(enrolledStudents);
     }
     private Map<Student, List<Boolean>> attendanceRecords; // Maps each student to their attendance record
