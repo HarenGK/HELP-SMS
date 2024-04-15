@@ -284,9 +284,7 @@ public class Main {
 
         // Input validation for new course time
         System.out.print("Enter " + courseId + " course time: ");
-        String courseTime = scanner.next();
-
-        scanner.nextLine();
+        String courseTime = scanner.nextLine();
 
         // Input validation for new course duration
         System.out.print("Enter " + courseId + " course duration: ");
@@ -468,8 +466,6 @@ public class Main {
             // Input for new course time
             System.out.print("Enter " + courseId + " course time: ");
             String courseTime = scanner.next();
-
-            scanner.nextLine();
 
             // Input for new course duration
             System.out.print("Enter " + courseId + " course duration: ");
