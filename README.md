@@ -67,6 +67,6 @@ This project is a School Management System (SMS) developed in Java, designed to 
 To get started with the School Management System, follow these steps:
 
 1. Clone the repository to your local machine
-  _git clone https://github.com/your_username/school-management-system.git_
+  git clone https://github.com/your_username/school-management-system.git
 2. Open the project (under src) in your preferred Java IDE.
 3. Compile and run Main.Java to start using the School Management System.
