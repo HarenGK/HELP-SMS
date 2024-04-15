@@ -8,9 +8,11 @@ This project is a School Management System (SMS) developed in Java, designed to 
 
 ## Table of Contents
 
-- [Features](#features)
-- [Getting Started](#getting-started)
 - [Project Authors](#authors)
+- [Features](#features)
+- [Classes and Structures](#classes-and-structures)
+- [Getting Started](#getting-started)
+
 
 ## Authors
 
@@ -49,18 +51,18 @@ This project is a School Management System (SMS) developed in Java, designed to 
 1. **School:**
    Represents the educational institution and manages students, teachers, and courses.
 2. **Student:**
-   Base class for Part Time and Full Time Student, representing student's information and managing enrolled courses.
+   Base class for Part Time and Full Time Students, representing student's information and managing enrolled courses.
 3. **Part-time Student:**
    Inherits Students, contains Employment Status Information and Maximum Credit Hours information.
 4. **Full-time Student:**
    Inherits Students, contains Scholarship Amount Value and Minimum Credit Hours information.
 5. **Teacher:**
-   Represents teacher's information and managing assigned courses.
+   Represents teacher's information and manages assigned courses.
 6. **Course:** 
    Represents courses offered by the school and manages enrolled students and assigned teachers.
 
 
-## Classes and Structures
+## Getting Started
 
 To get started with the School Management System, follow these steps:
 
